@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thi Thử Vào Lớp 6 – Trần Đại Nghĩa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b2a;--card:#1a2f47;--border:#2a4460;
+  --gold:#c9a84c;--gold-light:#e8c96a;--gold-dim:#7a6230;
+  --text:#e8dfc8;--muted:#8a9ab5;
+  --green:#4caf7a;--red:#e05c5c;--blue:#4a9eda;--purple:#a07de0;
+  --r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--navy);color:var(--text);font-family:'Source Serif 4',Georgia,serif;min-height:100vh;line-height:1.75;font-size:17px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(201,168,76,.12) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 90% 80%,rgba(74,158,218,.07) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.screen{display:none;position:relative;z-index:1;}
+.screen.active{display:block;}
+
+/* TABS */
+.tab-bar{display:flex;border-bottom:1px solid var(--border);background:rgba(13,27,42,.95);backdrop-filter:blur(10px);position:sticky;top:0;z-index:200;}
+.tab{flex:1;padding:14px 6px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .25s;}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab:hover:not(.active){color:var(--text);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* WELCOME */
+.hero{display:flex;flex-direction:column;align-items:center;padding:44px 20px 32px;text-align:center;}
+.emblem{width:80px;height:80px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 18px;background:radial-gradient(circle,rgba(201,168,76,.15),transparent);animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.3);}50%{box-shadow:0 0 0 12px rgba(201,168,76,0);}}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,50px);font-weight:900;line-height:1.15;margin-bottom:4px;}
+h1 span{color:var(--gold);}
+.sub{font-size:15px;color:var(--muted);font-style:italic;margin-bottom:28px;}
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:560px;width:100%;margin-bottom:24px;}
+.ic{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;}
+.ic .v{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);display:block;}
+.ic .l{font-size:11px;color:var(--muted);margin-top:2px;}
+
+/* SET SELECTOR */
+.set-selector{max-width:520px;width:100%;margin-bottom:20px;}
+.set-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:10px;}
+.set-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.set-btn{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:12px 8px;cursor:pointer;transition:all .22s;text-align:center;font-family:'Source Serif 4',serif;color:var(--text);}
+.set-btn:hover{border-color:var(--gold-dim);}
+.set-btn.active-set{border-color:var(--gold);background:rgba(201,168,76,.12);}
+.set-btn .sn{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);display:block;margin-bottom:3px;}
+.set-btn .sd{font-size:11px;color:var(--muted);}
+
+.btn-start{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);border:none;padding:14px 40px;border-radius:50px;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 24px rgba(201,168,76,.35);}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,168,76,.45);}
+.disc{max-width:460px;font-size:13px;color:var(--muted);margin-top:14px;line-height:1.6;border-top:1px solid var(--border);padding-top:14px;}
+
+/* STRUCTURE TAB */
+.page{padding:28px 20px 48px;max-width:660px;margin:0 auto;}
+.page h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:6px;}
+.page .ph{text-align:center;color:var(--muted);font-size:14px;margin-bottom:28px;}
+.section-title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:14px;}
+
+/* timeline */
+.tl-bar{display:flex;height:52px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);}
+.tl-seg{display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.85);}
+.tl-seg span{font-size:10px;opacity:.6;margin-top:1px;}
+.ts1{flex:30;background:rgba(74,158,218,.25);border-right:1px solid var(--border);}
+.ts2{flex:20;background:rgba(201,168,76,.2);border-right:1px solid var(--border);}
+.ts3{flex:20;background:rgba(76,175,122,.2);border-right:1px solid var(--border);}
+.ts4{flex:20;background:rgba(224,92,92,.2);}
+.tl-lbls{display:flex;margin-top:5px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.tl-lbls .l1{flex:30;}
+.tl-lbls .l2{flex:60;text-align:center;}
+.tl-lbls .l3{flex:10;text-align:right;}
+
+/* struct cards */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.sc-a::before{background:linear-gradient(90deg,#2a7ab5,var(--blue));}
+.sc-b::before{background:linear-gradient(90deg,var(--gold-dim),var(--gold));}
+.sc-c::before{background:linear-gradient(90deg,#2e8b57,var(--green));}
+.sc-d::before{background:linear-gradient(90deg,#c0392b,var(--red));}
+.stag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;padding:2px 6px;border-radius:3px;margin-bottom:6px;}
+.tt{background:rgba(74,158,218,.15);color:var(--blue);}
+.tl2{background:rgba(201,168,76,.15);color:var(--gold);}
+.sc-ico{font-size:20px;margin-bottom:6px;}
+.sc-h{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.sc-pts{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--gold);margin-bottom:4px;}
+.sc-time{font-size:12px;color:var(--muted);}
+.sc-note{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6;}
+.total-box{background:var(--card);border:1px solid var(--gold-dim);border-radius:var(--r);padding:16px;text-align:center;margin-bottom:20px;}
+.total-box .big{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--gold);}
+.total-box .sm{font-size:13px;color:var(--muted);}
+
+/* criteria */
+.cr{display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:8px;font-size:14px;}
+.cr-ico{font-size:18px;flex-shrink:0;margin-top:1px;}
+.cr-sub{font-size:12px;color:var(--muted);}
+
+/* tips */
+.tip{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:12px;}
+.tip-h{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.tip-b{font-size:15px;color:var(--muted);line-height:1.75;}
+.tip-b strong{color:var(--text);}
+
+/* EXAM */
+#exam-screen{padding:0 0 60px;}
+.exam-hdr{position:sticky;top:0;z-index:100;background:rgba(13,27,42,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.etitle{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:1px;white-space:nowrap;}
+.pw{flex:1;max-width:300px;}
+.pi{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
+.pb{height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.pf{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width .4s ease;}
+.timer{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--gold);letter-spacing:2px;white-space:nowrap;}
+.timer.warn{color:var(--red);animation:blink 1s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.ebody{max-width:780px;margin:0 auto;padding:28px 20px;}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.sbadge{color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;text-transform:uppercase;}
+.b-sci{background:linear-gradient(135deg,#2a7ab5,var(--blue));}
+.b-soc{background:linear-gradient(135deg,#6a4e9e,var(--purple));}
+.b-math{background:linear-gradient(135deg,#2e8b57,var(--green));}
+.b-en{background:linear-gradient(135deg,var(--gold-dim),var(--gold));}
+.sec-name{font-family:'Playfair Display',serif;font-size:17px;}
+
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;margin-bottom:18px;transition:border-color .3s;animation:sli .35s ease;}
+@keyframes sli{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.qcard.ans{border-color:rgba(201,168,76,.4);}
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;}
+.qtag{font-size:10px;color:var(--muted);background:var(--border);padding:2px 7px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
+.qtext{font-size:17px;line-height:1.7;color:var(--text);margin-bottom:18px;}
+.passage{background:rgba(42,68,96,.4);border-left:3px solid var(--gold-dim);padding:14px 18px;border-radius:0 8px 8px 0;font-size:15px;line-height:1.85;font-style:italic;margin-bottom:14px;}
+.mathbox{background:rgba(46,139,87,.1);border:1px solid rgba(76,175,122,.25);border-radius:8px;padding:14px 18px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:2;color:var(--text);}
+
+.opts{display:flex;flex-direction:column;gap:10px;}
+.opt{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border:1.5px solid var(--border);border-radius:8px;padding:13px 16px;cursor:pointer;transition:all .2s;text-align:left;width:100%;font-family:'Source Serif 4',serif;font-size:16px;color:var(--text);line-height:1.55;}
+.opt:hover:not(.dis){border-color:var(--gold-dim);background:rgba(201,168,76,.06);}
+.opt.sel{border-color:var(--gold);background:rgba(201,168,76,.12);}
+.opt.ok{border-color:var(--green);background:rgba(76,175,122,.12);}
+.opt.bad{border-color:var(--red);background:rgba(224,92,92,.1);}
+.opt.dis{cursor:default;}
+.opt.show-ok{border-color:var(--green);background:rgba(76,175,122,.08);}
+.ol{display:flex;align-items:center;justify-content:center;width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--border);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--muted);transition:all .2s;}
+.opt.sel .ol{background:var(--gold);color:var(--navy);}
+.opt.ok .ol,.opt.show-ok .ol{background:var(--green);color:#fff;}
+.opt.bad .ol{background:var(--red);color:#fff;}
+
+.exp{margin-top:12px;padding:13px 16px;background:rgba(42,68,96,.5);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;font-size:14px;line-height:1.7;display:none;}
+.exp.show{display:block;animation:fi .3s ease;}
+.exp strong{color:var(--blue);}
+@keyframes fi{from{opacity:0;}to{opacity:1;}}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;max-width:780px;margin:0 auto;padding:0 20px;gap:10px;}
+.btn-nav{background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 26px;border-radius:8px;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;transition:all .2s;}
+.btn-nav:hover{border-color:var(--gold-dim);}
+.btn-nav:disabled{opacity:.3;cursor:default;}
+.btn-sub{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--navy);border:none;padding:12px 26px;border-radius:8px;font-family:'Playfair Display',serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .2s;box-shadow:0 2px 14px rgba(201,168,76,.25);}
+.btn-sub:hover{transform:translateY(-1px);}
+
+.dot-wrap{max-width:780px;margin:0 auto 18px;padding:0 20px;}
+.dot-inner{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;}
+.dt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;text-align:center;}
+.dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;}
+.dot{width:28px;height:28px;border-radius:50%;background:var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;border:1.5px solid transparent;}
+.dot.ansd{background:rgba(201,168,76,.2);border-color:var(--gold-dim);color:var(--gold);}
+.dot.cur{border-color:var(--gold);color:var(--gold);}
+.dot-sec{width:100%;display:flex;align-items:center;gap:6px;margin:5px 0 3px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.dot-sec::before,.dot-sec::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* RESULTS */
+#results-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;text-align:center;}
+.res-ring{position:relative;width:150px;height:150px;margin:0 auto 24px;}
+.res-ring svg{transform:rotate(-90deg);}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:8;}
+.ring-fill{fill:none;stroke-width:8;stroke-linecap:round;stroke-dasharray:440;stroke-dashoffset:440;transition:stroke-dashoffset 1.5s cubic-bezier(.4,0,.2,1);}
+.res-ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.res-score{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--gold);line-height:1;}
+.res-tot{font-size:12px;color:var(--muted);}
+.rl{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,34px);font-weight:700;margin-bottom:5px;}
+.rm{color:var(--muted);font-size:14px;margin-bottom:24px;}
+.stats{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;}
+.sb{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 20px;min-width:80px;}
+.sb .n{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;display:block;margin-bottom:2px;}
+.sb .n.g{color:var(--green);}
+.sb .n.r{color:var(--red);}
+.sb .n.b{color:var(--blue);}
+.sb .s{font-size:11px;color:var(--muted);}
+.sec-bd{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:360px;width:100%;margin-bottom:20px;}
+.bdc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 12px;text-align:left;}
+.bdc .bh{font-size:11px;color:var(--muted);margin-bottom:3px;}
+.bdc .bs{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;}
+.btn-r{padding:12px 32px;border-radius:50px;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;margin:4px;}
+.btn-r.gold{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--navy);border:none;box-shadow:0 4px 18px rgba(201,168,76,.3);}
+.btn-r.gold:hover{transform:translateY(-2px);}
+.btn-r.out{background:var(--card);border:1px solid var(--gold-dim);color:var(--gold);}
+.btn-r.out:hover{background:rgba(201,168,76,.1);}
+.gn{margin-top:16px;font-size:12px;color:var(--muted);max-width:360px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);}
+.res-set-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;}
+
+@media(max-width:500px){
+  .ig{grid-template-columns:repeat(2,1fr);}
+  .sg{grid-template-columns:1fr;}
+  .sc:first-child,.sc:last-child{grid-column:auto;}
+  .exam-hdr{flex-wrap:wrap;}
+  .pw{order:3;flex:0 0 100%;max-width:100%;}
+  .qcard{padding:18px;}
+  .set-btns{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ WELCOME ═══════════════ -->
+<div id="welcome" class="screen active">
+  <div class="tab-bar">
+    <button class="tab active" onclick="switchTab('th')">🏠 Trang chủ</button>
+    <button class="tab" onclick="switchTab('ts')">📋 Cấu trúc đề</button>
+    <button class="tab" onclick="switchTab('tt')">💡 Bí kíp ôn</button>
+  </div>
+
+  <!-- HOME -->
+  <div id="th" class="tab-content active">
+    <div class="hero">
+      <div class="emblem">🎓</div>
+      <div class="tag">TP.HCM · Kỳ Khảo Sát Năng Lực 2025</div>
+      <h1>Trường <span>Trần Đại Nghĩa</span></h1>
+      <p class="sub">Bài thi thử tuyển sinh lớp 6 — Phần trắc nghiệm (20 câu tiếng Anh)</p>
+      <div class="ig">
+        <div class="ic"><span class="v">20</span><div class="l">Câu hỏi</div></div>
+        <div class="ic"><span class="v">30'</span><div class="l">Thời gian</div></div>
+        <div class="ic"><span class="v">2đ</span><div class="l">Mỗi câu</div></div>
+        <div class="ic"><span class="v">40đ</span><div class="l">Tổng phần</div></div>
+      </div>
+
+      <!-- SET SELECTOR -->
+      <div class="set-selector">
+        <div class="set-label">Chọn bộ đề</div>
+        <div class="set-btns">
+          <button class="set-btn active-set" onclick="selectSet(0,this)">
+            <span class="sn">Đề 1</span>
+            <span class="sd">Hành tinh · Lịch sử · Toán logic</span>
+          </button>
+          <button class="set-btn" onclick="selectSet(1,this)">
+            <span class="sn">Đề 2</span>
+            <span class="sd">Nguyên tố · Địa lý · Tỷ lệ %</span>
+          </button>
+          <button class="set-btn" onclick="selectSet(2,this)">
+            <span class="sn">Đề 3</span>
+            <span class="sd">Vật lý · ASEAN · Hình học</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:500px;margin-bottom:20px;font-size:13px;">
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(74,158,218,.15);color:var(--blue);">🔬 Khoa học tự nhiên</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(160,125,224,.15);color:var(--purple);">🌏 Khoa học xã hội</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(76,175,122,.15);color:var(--green);">🧮 Toán & Tư duy logic</span>
+        <span style="padding:5px 12px;border-radius:20px;background:rgba(201,168,76,.15);color:var(--gold);">💡 Tiếng Anh</span>
+      </div>
+      <button class="btn-start" onclick="startExam()">Bắt đầu thi thử →</button>
+      <p class="disc">⚠️ Đề được biên soạn theo cấu trúc đề thi thực tế, gồm đủ 4 nhóm kiến thức trong phần trắc nghiệm. Kết quả mang tính tham khảo.</p>
+    </div>
+  </div>
+
+  <!-- STRUCTURE -->
+  <div id="ts" class="tab-content">
+    <div class="page">
+      <h2>Cấu trúc Bài Khảo Sát Chính Thức</h2>
+      <p class="ph">Năm học 2024–2025 & 2025–2026 (cấu trúc giữ ổn định)</p>
+
+      <div class="section-title">Phân bố thời gian — 90 phút</div>
+      <div class="tl-bar">
+        <div class="tl-seg ts1">Trắc nghiệm<span>30 phút</span></div>
+        <div class="tl-seg ts2">T.Anh tự luận<span>20 phút</span></div>
+        <div class="tl-seg ts3">Toán logic<span>20 phút</span></div>
+        <div class="tl-seg ts4">Đọc-Văn<span>20 phút</span></div>
+      </div>
+      <div class="tl-lbls"><div class="l1">0'</div><div class="l2">← 60 phút tự luận →</div><div class="l3">90'</div></div>
+
+      <div class="section-title" style="margin-top:28px;">Chi tiết từng phần</div>
+      <div class="sg">
+        <div class="sc sc-a" style="grid-column:1/-1;">
+          <div class="stag tt">TRẮC NGHIỆM</div>
+          <div class="sc-ico">📝</div>
+          <div class="sc-h">Phần 1 — Trắc nghiệm (20 câu tiếng Anh)</div>
+          <div class="sc-pts">40 điểm</div>
+          <div class="sc-time">⏱ 30 phút · 20 câu × 2 điểm · Toàn bộ bằng tiếng Anh</div>
+          <div class="sc-note">Nội dung: Khoa học tự nhiên · Lịch sử – Địa lý · Toán học & Tư duy logic · Tiếng Anh học thuật · Thường thức đời sống.</div>
+        </div>
+        <div class="sc sc-b">
+          <div class="stag tl2">TỰ LUẬN</div>
+          <div class="sc-ico">🇬🇧</div>
+          <div class="sc-h">Phần 2a — Tiếng Anh</div>
+          <div class="sc-pts">30 điểm</div>
+          <div class="sc-time">⏱ ~20 phút · Làm bằng tiếng Anh</div>
+          <div class="sc-note">Nghe hiểu, đọc hiểu, viết. Trình độ tương đương B1–B2.</div>
+        </div>
+        <div class="sc sc-c">
+          <div class="stag tl2">TỰ LUẬN</div>
+          <div class="sc-ico">🧮</div>
+          <div class="sc-h">Phần 2b — Toán & Tư duy Logic</div>
+          <div class="sc-pts">15 điểm</div>
+          <div class="sc-time">⏱ ~20 phút · Làm bằng tiếng Việt</div>
+          <div class="sc-note">Dãy số, quy luật, bài toán đố nhiều bước, hình học, logic suy luận.</div>
+        </div>
+        <div class="sc sc-d" style="grid-column:1/-1;">
+          <div class="stag tl2">TỰ LUẬN</div>
+          <div class="sc-ico">📖</div>
+          <div class="sc-h">Phần 2c — Đọc hiểu & Làm văn (tiếng Việt)</div>
+          <div class="sc-pts">15 điểm</div>
+          <div class="sc-time">⏱ ~20 phút · Làm bằng tiếng Việt</div>
+          <div class="sc-note">Đọc hiểu văn bản (thơ hoặc văn xuôi), trả lời câu hỏi ngắn, viết đoạn văn ngắn.</div>
+        </div>
+      </div>
+
+      <div class="total-box">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:6px;">TỔNG ĐIỂM</div>
+        <div class="big">100 điểm</div>
+        <div class="sm">Trắc nghiệm 40đ + Tự luận 60đ · Thời gian 90 phút</div>
+      </div>
+
+      <div class="section-title">Điều kiện dự thi & xét tuyển</div>
+      <div class="cr"><span class="cr-ico">📚</span><div><div>Đã hoàn thành chương trình tiểu học tại TP.HCM</div><div class="cr-sub">Học sinh lớp 5 tốt nghiệp năm học hiện tại</div></div></div>
+      <div class="cr"><span class="cr-ico">🎯</span><div><div>Điểm kiểm tra cuối năm lớp 5: Toán và Tiếng Việt ≥ 9/10</div><div class="cr-sub">Điều kiện bắt buộc để đăng ký dự thi</div></div></div>
+      <div class="cr"><span class="cr-ico">📊</span><div><div>Xét tuyển từ điểm cao xuống thấp đến đủ 350 chỉ tiêu</div><div class="cr-sub">Tỷ lệ chọi năm 2025: ~1/14 (4.851 thí sinh / 350 chỉ tiêu)</div></div></div>
+      <div class="cr"><span class="cr-ico">🏫</span><div><div>Không trúng tuyển vẫn xét vào lớp 6 công lập theo khu vực</div><div class="cr-sub">Chính sách của Sở GD&ĐT TP.HCM</div></div></div>
+
+      <div style="text-align:center;margin-top:24px;">
+        <button class="btn-start" onclick="startExam()">Thi thử ngay →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div id="tt" class="tab-content">
+    <div class="page">
+      <h2>Bí kíp ôn luyện & Chiến thuật thi</h2>
+      <p class="ph">Tổng hợp từ phân tích đề thi các năm 2022–2025</p>
+
+      <div class="tip" style="border-left:3px solid var(--blue);">
+        <div class="tip-h">🕐 Phân bổ thời gian trong phòng thi</div>
+        <div class="tip-b">Trắc nghiệm: <strong>30 phút / 20 câu = 1.5 phút/câu</strong>. Đọc nhanh, không sa lầy vào câu khó. Đọc passage trước câu hỏi để biết cần tìm gì. Không bỏ trống — không trừ điểm câu sai. Nên làm câu chắc trước, khó sau.</div>
+      </div>
+
+      <div class="tip" style="border-left:3px solid var(--green);">
+        <div class="tip-h">🧮 Toán & Tư duy logic — phần dễ bỏ quên nhất</div>
+        <div class="tip-b">Trong phần trắc nghiệm, toán logic thường 3–5 câu. Dạng thường gặp: <strong>dãy số, bài toán % / phân số, bài toán đếm hình, bài toán logic vị trí, số học cơ bản</strong>. Tự luận phải viết đầy đủ lời giải — mỗi bước tính toán đều có điểm thành phần.</div>
+      </div>
+
+      <div class="tip" style="border-left:3px solid var(--gold);">
+        <div class="tip-h">🇬🇧 Tiếng Anh — chiếm 70/100 điểm!</div>
+        <div class="tip-b">Phần trắc nghiệm + tự luận tiếng Anh tổng cộng <strong>70 điểm</strong> (40+30). Đây là môn quyết định. Cần luyện: đọc hiểu văn bản khoa học, từ vựng học thuật (địa lý, sinh học, lịch sử), viết đoạn văn ngắn. Trình độ tương đương <strong>KET–PET Cambridge (A2–B1)</strong>.</div>
+      </div>
+
+      <div class="tip" style="border-left:3px solid var(--purple);">
+        <div class="tip-h">📖 Tiếng Việt — đừng coi nhẹ</div>
+        <div class="tip-b">Đọc hiểu thường dùng <strong>thơ hoặc văn xuôi ngắn</strong>. Câu hỏi kiểm tra: nội dung chính, biện pháp tu từ, cảm nhận. Phần viết cần có cấu trúc rõ mở-thân-kết, dùng từ chính xác. Tập viết đoạn văn 5–7 câu có luận điểm rõ.</div>
+      </div>
+
+      <div class="tip" style="border-left:3px solid var(--red);">
+        <div class="tip-h">📅 Điểm chuẩn & mục tiêu cụ thể</div>
+        <div class="tip-b">
+          Điểm chuẩn tham khảo các năm: <strong>63–72/100</strong>.<br>
+          Mục tiêu cụ thể từng phần để đạt ~70 điểm:<br>
+          • Trắc nghiệm: <strong>≥ 30/40</strong> (15+ câu đúng)<br>
+          • Tiếng Anh tự luận: <strong>≥ 22/30</strong><br>
+          • Toán logic: <strong>≥ 11/15</strong><br>
+          • Đọc-Văn: <strong>≥ 10/15</strong>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:24px;">
+        <button class="btn-start" onclick="startExam()">Bắt đầu luyện thi →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ EXAM ═══════════════ -->
+<div id="exam-screen" class="screen">
+  <div class="exam-hdr">
+    <div class="etitle" id="etitle">TDN · Đề 1</div>
+    <div class="pw">
+      <div class="pi"><span id="ptxt">Câu 1/20</span><span id="ppct">0%</span></div>
+      <div class="pb"><div class="pf" id="pfill" style="width:0%"></div></div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+  <div class="ebody" id="ebody"></div>
+  <div class="dot-wrap">
+    <div class="dot-inner">
+      <div class="dt">Điều hướng câu hỏi</div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </div>
+  <div class="nav-row">
+    <button class="btn-nav" id="bprev" onclick="nav(-1)" disabled>← Trước</button>
+    <button class="btn-sub" onclick="confirmSub()" id="bsub">Nộp bài</button>
+    <button class="btn-nav" id="bnext" onclick="nav(1)">Tiếp →</button>
+  </div>
+</div>
+
+<!-- ═══════════════ RESULTS ═══════════════ -->
+<div id="results-screen" class="screen">
+  <div class="res-ring">
+    <svg width="150" height="150" viewBox="0 0 150 150">
+      <circle class="ring-bg" cx="75" cy="75" r="65"/>
+      <circle class="ring-fill" id="rfill" cx="75" cy="75" r="65"/>
+    </svg>
+    <div class="res-ctr">
+      <div class="res-score" id="rscore">0</div>
+      <div class="res-tot">/ 40 điểm</div>
+    </div>
+  </div>
+  <div class="res-set-badge" id="res-set-badge">ĐỀ 1</div>
+  <div class="rl" id="rlabel"></div>
+  <p class="rm" id="rmsg"></p>
+  <div class="stats">
+    <div class="sb"><span class="n g" id="rcor">0</span><div class="s">✓ Đúng</div></div>
+    <div class="sb"><span class="n r" id="rwrg">0</span><div class="s">✗ Sai</div></div>
+    <div class="sb"><span class="n b" id="rskp">0</span><div class="s">— Bỏ qua</div></div>
+  </div>
+  <div class="sec-bd" id="secbd"></div>
+  <div>
+    <button class="btn-r out" onclick="reviewExam()">Xem lại đáp án</button>
+    <button class="btn-r gold" onclick="retryExam()">Thi lại →</button>
+    <br>
+    <button class="btn-r out" onclick="goHome()" style="margin-top:6px;">🏠 Về trang chủ</button>
+  </div>
+  <div class="gn">📊 Điểm chuẩn ~63–72/100 tổng. Phần trắc nghiệm này = 40/100đ. Cần ≥ 28–32/40 để cạnh tranh.</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  ĐỀ 1
+// ══════════════════════════════════════════════
+const Q1=[
+  // ── NATURAL SCIENCE (5) ──
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which is the correct order of planets from the Sun?",
+   o:["Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune","Mercury, Earth, Venus, Mars, Jupiter, Saturn, Neptune, Uranus","Venus, Mercury, Earth, Mars, Saturn, Jupiter, Uranus, Neptune","Mercury, Venus, Mars, Earth, Jupiter, Saturn, Uranus, Neptune"],
+   a:0,ex:"Correct order: <strong>Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune</strong>. Mnemonic: My Very Excited Mother Just Served Us Nachos."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"A plant is kept in a completely dark room for one week. What happens to its leaves?",
+   o:["They turn yellow and lose their green colour","They grow larger and greener","They remain unchanged","They produce more oxygen than usual"],
+   a:0,ex:"Without light, photosynthesis stops and <strong>chlorophyll breaks down</strong>, causing leaves to turn yellow — a process called etiolation."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Sound travels fastest through which medium?",
+   o:["Air (~343 m/s)","Water (~1,480 m/s)","Steel (~5,100 m/s)","Vacuum"],
+   a:2,ex:"<strong>Sound travels fastest through solids</strong>. In steel ~5,100 m/s, water ~1,480 m/s, air ~343 m/s. Sound cannot travel through vacuum at all."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which organ filters waste from blood to produce urine?",
+   o:["Liver","Heart","Lungs","Kidney"],
+   a:3,ex:"The <strong>kidneys</strong> filter blood to remove waste and excess water, producing urine. Humans have two kidneys, located at the back of the abdomen."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which material is a good conductor of electricity?",
+   o:["Rubber","Wood","Copper","Plastic"],
+   a:2,ex:"<strong>Copper</strong> is an excellent conductor due to its free electrons. Rubber, wood, and plastic are insulators — they resist electric current flow."},
+
+  // ── SOCIAL SCIENCE (5) ──
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Which country became the world's most populous nation in 2023?",
+   o:["China","India","United States","Indonesia"],
+   a:1,ex:"In 2023, <strong>India</strong> surpassed China, reaching over 1.4 billion people — making it the world's most populous country."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"In which year did Hồ Chí Minh read Vietnam's Declaration of Independence?",
+   o:["1930","1945","1954","1975"],
+   a:1,ex:"On <strong>September 2, 1945</strong>, President Hồ Chí Minh read the Declaration of Independence at Ba Đình Square, Hanoi, establishing the Democratic Republic of Vietnam."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"What is the capital city of Australia?",
+   o:["Sydney","Melbourne","Canberra","Brisbane"],
+   a:2,ex:"<strong>Canberra</strong> is Australia's capital. It was purpose-built as a compromise between Sydney and Melbourne, both of which wanted to be the capital."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"The Mekong River originates from which country?",
+   o:["Myanmar","Laos","Cambodia","China (Tibet Plateau)"],
+   a:3,ex:"The <strong>Mekong River</strong> originates from the <strong>Tibetan Plateau in China</strong>. It flows through 6 countries before reaching Vietnam's Mekong Delta."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Where were the 2024 Summer Olympic Games held?",
+   o:["Tokyo","London","Los Angeles","Paris"],
+   a:3,ex:"The <strong>2024 Summer Olympics (Paris 2024)</strong> were held in Paris, France, from July 26 to August 11, 2024 — Paris' third time hosting the Games."},
+
+  // ── MATH & LOGIC (5) ──
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"2 → 6 → 18 → 54 → ____ → 486",
+   q:"What is the missing number in this sequence?\n2,  6,  18,  54,  ____,  486",
+   o:["108","126","162","180"],
+   a:2,ex:"Each term is multiplied by <strong>3</strong>: 2×3=6, 6×3=18, 18×3=54, 54×3=<strong>162</strong>, 162×3=486. This is a geometric sequence with common ratio 3."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• Apples: 5,000 VND each\n• Oranges: 8,000 VND each\n• Total: 10 fruits, paid 62,000 VND\n→ Find: number of apples",
+   q:"A store sells apples at 5,000 VND and oranges at 8,000 VND. Linh buys 10 fruits and pays exactly 62,000 VND. How many apples did she buy?",
+   o:["4 apples","5 apples","6 apples","7 apples"],
+   a:2,ex:"Let apples = a. Then: 5000a + 8000(10−a) = 62000 → −3000a = −18000 → <strong>a = 6</strong>. Check: 6×5000 + 4×8000 = 62,000 ✓"},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"Nam _ _ _ _ Hoa  (left → right)\n• Minh is NOT at either end\n• Lan stands immediately LEFT of Minh\n• Hoa = rightmost · Nam = leftmost",
+   q:"Five friends stand in a line. Nam is leftmost, Hoa is rightmost. Minh is not at either end. Lan stands immediately to Minh's left. Where does Tú stand?",
+   o:["2nd from left","3rd from left (middle)","4th from left","Between Lan and Hoa"],
+   a:2,ex:"Nam(1), Hoa(5). Lan is directly left of Minh. Only solution: <strong>Nam(1), Lan(2), Minh(3), Tú(4), Hoa(5)</strong>. So Tú is <strong>4th from left</strong>."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"Perimeter of square = 48 cm\n→ Find: Area (cm²)",
+   q:"A square has a perimeter of 48 cm. What is its area?",
+   o:["96 cm²","124 cm²","144 cm²","192 cm²"],
+   a:2,ex:"Side = 48 ÷ 4 = <strong>12 cm</strong>. Area = 12² = <strong>144 cm²</strong>."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• Girls = 60% of class\n• Number of girls = 18\n→ Find: number of boys",
+   q:"In a class, 60% of students are girls. If there are 18 girls, how many boys are there?",
+   o:["10 boys","12 boys","14 boys","16 boys"],
+   a:1,ex:"Total = 18 ÷ 0.6 = <strong>30 students</strong>. Boys = 30 − 18 = <strong>12</strong>. Check: 12/30 = 40% boys ✓"},
+
+  // ── ENGLISH (5) ──
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   p:"Scientists have discovered a new species of deep-sea fish near the Mariana Trench. This fish survives at depths over 8,000 metres, where pressure is about 800 times greater than at sea level. The fish has a translucent body, large eyes, and produces its own light — a process called bioluminescence.",
+   q:"According to the passage, what makes this fish's habitat remarkable?",
+   o:["The water is very hot","The pressure is extremely high","There are many predators","There is too much sunlight"],
+   a:1,ex:"The passage states the fish survives where <strong>pressure is ~800 times greater than at sea level</strong>. Surviving such extreme pressure is what makes this discovery remarkable."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the grammatically correct sentence:",
+   o:["She don't like eating vegetables.","She doesn't likes eating vegetables.","She doesn't like eating vegetables.","She not like eating vegetables."],
+   a:2,ex:"With 3rd-person singular (she/he/it), use <strong>doesn't + base verb</strong>: <em>She doesn't like</em> (not 'likes'). Options A, B, D all have grammar errors."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   p:"Every year, billions of plastic bottles end up in the ocean. This plastic breaks into tiny pieces called microplastics, which are eaten by fish and sea animals. Scientists found microplastics even in human blood. Researchers say reducing single-use plastic is the most important step to protect the ocean.",
+   q:"What does 'microplastics' refer to in the passage?",
+   o:["Large pieces of plastic on beaches","A fish species that eats plastic","Very small pieces of broken-down plastic","A material used to clean the ocean"],
+   a:2,ex:"The passage defines it: plastic 'breaks into tiny pieces <strong>called microplastics</strong>'. The prefix micro- means very small."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Which word best completes the sentence?\n\"The scientist made a remarkable _____ that changed how we understand the human brain.\"",
+   o:["discover","discovered","discovery","discovering"],
+   a:2,ex:"After 'made', we need a <strong>noun</strong>. 'Discovery' is the noun form of 'discover'. The others are verb forms (base, past tense, gerund/participle)."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Read the clues and choose the correct answer:\n• Larger than a village but smaller than a city\n• Has a town hall, shops, and schools\n• You can walk from one end to the other in ~20 minutes",
+   o:["A forest","A town","A factory","A harbour"],
+   a:1,ex:"All clues describe a <strong>town</strong>: larger than a village, smaller than a city, has civic amenities (town hall), and is small enough to walk across in about 20 minutes."},
+];
+
+// ══════════════════════════════════════════════
+//  ĐỀ 2
+// ══════════════════════════════════════════════
+const Q2=[
+  // ── NATURAL SCIENCE (5) ──
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"What is the chemical symbol for gold?",
+   o:["Go","Gd","Au","Ag"],
+   a:2,ex:"Gold's symbol is <strong>Au</strong>, from the Latin word <em>aurum</em>. Silver is Ag (argentum). 'Go' is not a real symbol; Gd is Gadolinium."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which planet is known as the Red Planet?",
+   o:["Venus","Mars","Jupiter","Saturn"],
+   a:1,ex:"<strong>Mars</strong> appears red because its surface is covered with iron oxide (rust). Its nickname 'The Red Planet' has been known since ancient times."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"How many bones are in an adult human body?",
+   o:["150","180","206","248"],
+   a:2,ex:"An adult human body has <strong>206 bones</strong>. Babies are born with ~270 bones; many fuse together as they grow."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which gas makes up the largest percentage of Earth's atmosphere?",
+   o:["Oxygen (O₂)","Carbon dioxide (CO₂)","Nitrogen (N₂)","Argon (Ar)"],
+   a:2,ex:"<strong>Nitrogen (N₂)</strong> makes up about <strong>78%</strong> of Earth's atmosphere. Oxygen is about 21%, argon about 0.9%."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which organ in the human body produces insulin?",
+   o:["Liver","Kidney","Pancreas","Stomach"],
+   a:2,ex:"The <strong>pancreas</strong> produces insulin, a hormone that regulates blood sugar. When the pancreas fails to produce enough insulin, it can lead to diabetes."},
+
+  // ── SOCIAL SCIENCE (5) ──
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"What is the longest river in the world?",
+   o:["Amazon","Congo","Yangtze","Nile"],
+   a:3,ex:"The <strong>Nile River</strong> (~6,650 km), flowing through northeastern Africa, is generally considered the world's longest river — passing through 11 countries."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Which country has the largest land area in the world?",
+   o:["Canada","China","United States","Russia"],
+   a:3,ex:"<strong>Russia</strong> is the world's largest country by area at about 17.1 million km² — nearly twice the size of Canada, the second largest."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"In which year did Vietnam achieve national reunification?",
+   o:["1954","1968","1975","1986"],
+   a:2,ex:"Vietnam was reunified on <strong>April 30, 1975</strong>, when Saigon (now Ho Chi Minh City) fell. The Socialist Republic of Vietnam was officially declared on July 2, 1976."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Which ancient wonder was located in Alexandria, Egypt?",
+   o:["The Colosseum","The Great Lighthouse","The Hanging Gardens","The Sphinx"],
+   a:1,ex:"The <strong>Lighthouse of Alexandria</strong> (Pharos) was one of the Seven Wonders of the Ancient World. Built ~280 BC, it guided ships into the harbor before being destroyed by earthquakes."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"What is the currency of Japan?",
+   o:["Won","Yuan","Baht","Yen"],
+   a:3,ex:"Japan's currency is the <strong>Yen (¥)</strong>. Won is used in Korea, Yuan (Renminbi) in China, and Baht in Thailand."},
+
+  // ── MATH & LOGIC (5) ──
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"1 → 4 → 9 → 16 → ____ → 36",
+   q:"What is the missing number in this sequence?\n1,  4,  9,  16,  ____,  36",
+   o:["20","23","25","27"],
+   a:2,ex:"These are <strong>perfect squares</strong>: 1²=1, 2²=4, 3²=9, 4²=16, <strong>5²=25</strong>, 6²=36. The missing number is <strong>25</strong>."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• A train travels 240 km in 3 hours\n→ Find: time to travel 400 km at the same speed",
+   q:"A train travels 240 km in 3 hours. How long will it take to travel 400 km at the same speed?",
+   o:["4 hours 30 minutes","5 hours","5 hours 30 minutes","6 hours"],
+   a:1,ex:"Speed = 240 ÷ 3 = <strong>80 km/h</strong>. Time = 400 ÷ 80 = <strong>5 hours</strong>. Formula: Time = Distance ÷ Speed."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• Minh is older than Linh\n• Lan is younger than Linh\n• Tú is older than Minh\n→ Who is the youngest?",
+   q:"Minh is older than Linh. Lan is younger than Linh. Tú is older than Minh. Who is the youngest?",
+   o:["Linh","Minh","Lan","Tú"],
+   a:2,ex:"From the clues: Lan < Linh < Minh < Tú. So ordered from youngest to oldest: <strong>Lan, Linh, Minh, Tú</strong>. Lan is the youngest."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"Rectangle:\n• Length = 15 cm\n• Width = 8 cm\n→ Find: Perimeter",
+   q:"A rectangle has a length of 15 cm and a width of 8 cm. What is its perimeter?",
+   o:["46 cm","48 cm","54 cm","56 cm"],
+   a:0,ex:"Perimeter = 2 × (length + width) = 2 × (15 + 8) = 2 × 23 = <strong>46 cm</strong>. Area = 15 × 8 = 120 cm²."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• Total students: 40\n• Boys = 45%\n→ Find: number of girls",
+   q:"In a school, 45% of 40 students are boys. How many girls are there?",
+   o:["18 girls","20 girls","22 girls","24 girls"],
+   a:2,ex:"Boys = 40 × 45% = <strong>18 boys</strong>. Girls = 40 − 18 = <strong>22 girls</strong>. Check: 22/40 = 55% girls ✓"},
+
+  // ── ENGLISH (5) ──
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   p:"Robots are changing the way factories work. Modern robots can work 24 hours a day without breaks and can perform dangerous tasks that humans should not do. However, some people worry that robots will take away jobs from workers. Scientists believe that robots and humans will need to work together in the future.",
+   q:"According to the passage, what do scientists believe about the future?",
+   o:["Robots will completely replace humans","Factories will close down","Robots and humans will work together","Robots can only work 12 hours a day"],
+   a:2,ex:"The final sentence states scientists believe <strong>'robots and humans will need to work together in the future.'</strong> This directly answers the question."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the correct sentence using the past tense:",
+   o:["Yesterday, she go to school early.","Yesterday, she goes to school early.","Yesterday, she went to school early.","Yesterday, she goed to school early."],
+   a:2,ex:"<strong>'Went'</strong> is the irregular past tense of 'go'. 'Goed' is incorrect — 'go' is an irregular verb that does not follow the regular -ed pattern."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   p:"The Amazon rainforest, often called 'the lungs of the Earth', produces about 20% of the world's oxygen. It is home to over 10% of all species on Earth. Unfortunately, deforestation caused by farming, logging, and mining is destroying thousands of square kilometres of this vital ecosystem every year.",
+   q:"Why is the Amazon rainforest called 'the lungs of the Earth'?",
+   o:["It produces a large portion of the world's oxygen","It is the largest rainforest on Earth","Many animals live there","It absorbs all pollution from factories"],
+   a:0,ex:"The passage explains the nickname: the Amazon 'produces about <strong>20% of the world's oxygen</strong>' — like how lungs supply oxygen to the body."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Which word is the opposite of 'ancient'?",
+   o:["Old","Historic","Modern","Rare"],
+   a:2,ex:"<strong>'Modern'</strong> is the antonym (opposite) of 'ancient'. Ancient means very old or from a long time ago; modern means contemporary or up-to-date."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the word that best completes the sentence:\n\"The weather forecast _____ that it will rain heavily tomorrow.\"",
+   o:["tells","says","speaks","talks"],
+   a:1,ex:"We use <strong>'says'</strong> with a 'that' clause (indirect speech): 'The forecast says that...'. 'Tells' requires a person object ('tells us'). 'Speaks' and 'talks' are used differently."},
+];
+
+// ══════════════════════════════════════════════
+//  ĐỀ 3
+// ══════════════════════════════════════════════
+const Q3=[
+  // ── NATURAL SCIENCE (5) ──
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"What force keeps the Moon in orbit around the Earth?",
+   o:["Magnetic force","Electric force","Gravity","Friction"],
+   a:2,ex:"<strong>Gravity</strong> is the attractive force between objects with mass. Earth's gravity pulls the Moon toward it, while the Moon's orbital speed prevents it from falling — creating a stable orbit."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"What is the boiling point of water at sea level?",
+   o:["80°C","90°C","100°C","110°C"],
+   a:2,ex:"Water boils at <strong>100°C (212°F)</strong> at standard atmospheric pressure. At higher altitudes, lower air pressure causes water to boil at lower temperatures."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"How many chambers does the human heart have?",
+   o:["2","3","4","6"],
+   a:2,ex:"The human heart has <strong>4 chambers</strong>: left atrium, right atrium, left ventricle, and right ventricle. The right side pumps blood to the lungs; the left pumps oxygenated blood to the body."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"Which gas is most responsible for the greenhouse effect from human activity?",
+   o:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],
+   a:2,ex:"<strong>Carbon dioxide (CO₂)</strong> is the primary greenhouse gas from human activity. It traps heat from the sun within the atmosphere, contributing to global warming."},
+  {s:"Natural Science",sv:"🔬 Khoa học Tự nhiên",b:"b-sci",
+   q:"What is the process by which a liquid turns into a gas?",
+   o:["Condensation","Evaporation","Solidification","Sublimation"],
+   a:1,ex:"<strong>Evaporation</strong> is the process of a liquid becoming a gas. Condensation is the opposite (gas → liquid). Sublimation skips the liquid state (solid → gas), like dry ice."},
+
+  // ── SOCIAL SCIENCE (5) ──
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"How many continents are there on Earth?",
+   o:["5","6","7","8"],
+   a:2,ex:"There are <strong>7 continents</strong>: Asia, Africa, North America, South America, Antarctica, Europe, and Australia/Oceania. Asia is the largest; Australia is the smallest."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Which ocean is the largest in the world?",
+   o:["Atlantic Ocean","Indian Ocean","Arctic Ocean","Pacific Ocean"],
+   a:3,ex:"The <strong>Pacific Ocean</strong> covers about 165 million km² — more than the combined area of all Earth's landmasses. 'Pacific' means peaceful in Latin."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"What is the name of the mountain range that contains Mount Everest?",
+   o:["The Alps","The Andes","The Himalayas","The Rockies"],
+   a:2,ex:"Mount Everest (8,849 m) is part of the <strong>Himalayas</strong>, stretching across Nepal, Tibet, India, Bhutan, and Pakistan. 'Himalaya' means 'abode of snow' in Sanskrit."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"Hội An Ancient Town is a UNESCO World Heritage Site located in which province of Vietnam?",
+   o:["Thừa Thiên Huế","Quảng Nam","Đà Nẵng","Quảng Ngãi"],
+   a:1,ex:"<strong>Hội An</strong> is in <strong>Quảng Nam</strong> province. Recognized as a UNESCO World Heritage Site in 1999 for its exceptionally well-preserved trading port from the 15th–19th centuries."},
+  {s:"Social Science",sv:"🌏 Khoa học Xã hội",b:"b-soc",
+   q:"The ancient temple complex of Angkor Wat is located in which country?",
+   o:["Thailand","Vietnam","Laos","Cambodia"],
+   a:3,ex:"<strong>Angkor Wat</strong> is in <strong>Cambodia</strong>, near Siem Reap. Built in the early 12th century, it is the world's largest religious monument and a UNESCO World Heritage Site."},
+
+  // ── MATH & LOGIC (5) ──
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"3 → 7 → 15 → 31 → ____ → 127",
+   q:"What is the missing number in this sequence?\n3,  7,  15,  31,  ____,  127",
+   o:["55","60","63","65"],
+   a:2,ex:"Each term follows: ×2 + 1. So: 3×2+1=7, 7×2+1=15, 15×2+1=31, 31×2+1=<strong>63</strong>, 63×2+1=127. The missing number is <strong>63</strong>."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• An is 3 years older than Bình\n• In 5 years, An's age = twice Bình's current age\n→ Find: An's current age",
+   q:"An is 3 years older than Bình. In 5 years, An's age will equal twice Bình's current age. How old is An now?",
+   o:["7 years old","8 years old","9 years old","11 years old"],
+   a:3,ex:"Let Bình = b. An = b+3. Condition: (b+3)+5 = 2b → b+8 = 2b → b=8. An = 8+3 = <strong>11 years old</strong>. Check: An in 5 years = 16 = 2×8 ✓"},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• Red pens = 2× blue pens\n• Green pens = 12\n• Total = 48 pens\n→ Find: number of blue pens",
+   q:"A shop has red, blue, and green pens. Red pens are twice the number of blue pens. There are 12 green pens and 48 pens total. How many blue pens are there?",
+   o:["10","12","14","16"],
+   a:1,ex:"Green = 12. Red + Blue = 48−12 = 36. Let Blue = b, Red = 2b. So 3b = 36 → <strong>b = 12</strong>. Red=24, Blue=12, Green=12. Check: 24+12+12 = 48 ✓"},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"Right triangle:\n• Two shorter sides: 6 cm and 8 cm\n→ Find: hypotenuse (longest side)",
+   q:"A right triangle has two shorter sides of 6 cm and 8 cm. What is the length of the hypotenuse?",
+   o:["9 cm","10 cm","11 cm","12 cm"],
+   a:1,ex:"Using the <strong>Pythagorean theorem</strong>: c² = 6² + 8² = 36 + 64 = 100. c = √100 = <strong>10 cm</strong>. This is the classic 6-8-10 right triangle (scaled from 3-4-5)."},
+  {s:"Math & Logic",sv:"🧮 Toán & Tư duy Logic",b:"b-math",
+   mb:"• A book costs 45,000 VND\n• Discount: 20%\n→ Find: price after discount",
+   q:"A bookstore offers a 20% discount on all books. If a book originally costs 45,000 VND, how much do you pay?",
+   o:["30,000 VND","34,000 VND","36,000 VND","38,000 VND"],
+   a:2,ex:"Discount = 20% × 45,000 = 9,000 VND. Final price = 45,000 − 9,000 = <strong>36,000 VND</strong>. Or: pay 80% of original = 0.8 × 45,000 = 36,000 ✓"},
+
+  // ── ENGLISH (5) ──
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   p:"Many cities around the world are now building 'green rooftops' on buildings. These are gardens planted on the roofs of offices and apartments. Green rooftops help reduce temperatures in cities, clean the air, and provide habitats for birds and insects. Some buildings even grow vegetables on their rooftops to sell to local restaurants.",
+   q:"What is the main purpose of 'green rooftops' according to the passage?",
+   o:["To make buildings look more attractive","To benefit cities in multiple ways","To sell vegetables at a higher price","To replace normal rooftops permanently"],
+   a:1,ex:"The passage lists several benefits: reducing temperatures, cleaning air, providing habitats, and growing food. The main purpose is that green rooftops <strong>benefit cities in multiple ways</strong>."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the correct comparative sentence:",
+   o:["The Nile is more long than the Amazon.","The Nile is longer than the Amazon.","The Nile is more longer than the Amazon.","The Nile is longar than the Amazon."],
+   a:1,ex:"Short adjectives (1–2 syllables) use <strong>-er + than</strong> for comparatives: <em>longer than</em>. 'More long' is incorrect — we don't use 'more' with short adjectives like 'long'."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the word that has the closest meaning to 'enormous':",
+   o:["Tiny","Moderate","Huge","Ordinary"],
+   a:2,ex:"<strong>'Enormous'</strong> means extremely large. Its synonym is <strong>'huge'</strong>. 'Tiny' is its opposite. 'Moderate' means average-sized, and 'ordinary' means normal."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Choose the word that best completes the sentence:\n\"Despite the heavy rain, the football match _____ on time.\"",
+   o:["begin","begins","beginning","began"],
+   a:3,ex:"The sentence describes a completed past event. The past tense of 'begin' (an irregular verb) is <strong>'began'</strong>. 'Begun' would need a helper verb ('has begun')."},
+  {s:"English",sv:"💡 Tiếng Anh",b:"b-en",
+   q:"Read the clues and choose the correct answer:\n• I have pages but I am not a book\n• You carry me every day\n• I show you maps, photos, and messages\n• I can make phone calls",
+   o:["A notebook","A newspaper","A smartphone","A television"],
+   a:2,ex:"All clues point to a <strong>smartphone</strong>: it has scrollable 'pages' (screens), is carried daily, displays maps/photos/messages, and can make calls. A TV can't be carried; a notebook can't call."},
+];
+
+// ══════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════
+const SETS=[Q1,Q2,Q3];
+const SET_NAMES=["Đề 1","Đề 2","Đề 3"];
+let activeSet=0;
+let Q=Q1;
+let cur=0,answers=new Array(Q.length).fill(null),timeLeft=30*60,timerInt=null,submitted=false;
+
+function selectSet(idx,btn){
+  activeSet=idx;
+  Q=SETS[idx];
+  answers=new Array(Q.length).fill(null);
+  document.querySelectorAll('.set-btn').forEach((b,i)=>b.classList.toggle('active-set',i===idx));
+}
+
+function switchTab(id){
+  ['th','ts','tt'].forEach((t,i)=>{
+    document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
+    document.getElementById(t).classList.toggle('active',t===id);
+  });
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startExam(){
+  Q=SETS[activeSet];
+  answers=new Array(Q.length).fill(null);
+  cur=0;submitted=false;timeLeft=30*60;
+  clearInterval(timerInt);
+  document.getElementById('bsub').style.display='';
+  document.getElementById('timer').textContent='30:00';
+  document.getElementById('timer').classList.remove('warn');
+  document.getElementById('etitle').textContent='TDN · '+SET_NAMES[activeSet];
+  showScreen('exam-screen');
+  renderQ();renderDots();startTimer();
+}
+
+function startTimer(){
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60),s=timeLeft%60;
+    const el=document.getElementById('timer');
+    el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('warn',timeLeft<=120);
+    if(timeLeft<=0){clearInterval(timerInt);submitExam();}
+  },1000);
+}
+
+function renderQ(){
+  const q=Q[cur];
+  let secH='';
+  if(cur===0||Q[cur].s!==Q[cur-1].s)
+    secH=`<div class="sec-hdr"><div class="sbadge ${q.b}">${q.s}</div><div class="sec-name">${q.sv}</div></div>`;
+  const pH=q.p?`<div class="passage">${q.p}</div>`:'';
+  const mH=q.mb?`<div class="mathbox">${q.mb.replace(/\n/g,'<br>')}</div>`:'';
+  const qT=q.q.replace(/\n/g,'<br>');
+  const oH=q.o.map((o,i)=>{
+    const l=['A','B','C','D'][i];
+    let c='';
+    if(submitted){
+      if(i===q.a)c='ok show-ok dis';
+      else if(answers[cur]===i&&i!==q.a)c='bad dis';
+      else c='dis';
+    }else if(answers[cur]===i)c='sel';
+    return `<button class="opt ${c}" onclick="${submitted?'':'selectAns('+i+')'}"><span class="ol">${l}</span><span>${o}</span></button>`;
+  }).join('');
+  const eH=submitted?`<div class="exp show">💬 <strong>Giải thích:</strong> ${q.ex}</div>`:`<div class="exp"></div>`;
+  document.getElementById('ebody').innerHTML=`${secH}<div class="qcard${answers[cur]!==null?' ans':''}"><div class="qmeta"><span class="qnum">Câu ${cur+1}/${Q.length}</span><span class="qtag">${q.s}</span></div>${pH}${mH}<div class="qtext">${qT}</div><div class="opts">${oH}</div>${eH}</div>`;
+  const p=Math.round((cur+1)/Q.length*100);
+  document.getElementById('ptxt').textContent=`Câu ${cur+1}/${Q.length}`;
+  document.getElementById('ppct').textContent=`${p}%`;
+  document.getElementById('pfill').style.width=p+'%';
+  document.getElementById('bprev').disabled=cur===0;
+  document.getElementById('bnext').disabled=cur===Q.length-1;
+}
+
+function selectAns(i){if(submitted)return;answers[cur]=i;renderQ();renderDots();}
+function nav(d){cur=Math.max(0,Math.min(Q.length-1,cur+d));renderQ();renderDots();}
+function goQ(i){cur=i;renderQ();renderDots();}
+
+function renderDots(){
+  const secIco={"Natural Science":"🔬","Social Science":"🌏","Math & Logic":"🧮","English":"💡"};
+  let h='',last='';
+  Q.forEach((_,i)=>{
+    const s=Q[i].s;
+    if(s!==last){h+=`<div class="dot-sec">${secIco[s]} ${s}</div>`;last=s;}
+    let c=i===cur?'cur':answers[i]!==null?'ansd':'';
+    h+=`<div class="dot ${c}" onclick="goQ(${i})">${i+1}</div>`;
+  });
+  document.getElementById('dots').innerHTML=h;
+}
+
+function confirmSub(){
+  const sk=answers.filter(a=>a===null).length;
+  if(sk>0&&!confirm(`Còn ${sk} câu chưa trả lời. Nộp bài không?`))return;
+  submitExam();
+}
+
+function submitExam(){
+  clearInterval(timerInt);submitted=true;
+  let c=0,w=0,k=0;
+  const ss={};
+  Q.forEach((q,i)=>{
+    if(!ss[q.s])ss[q.s]={c:0,t:0};ss[q.s].t++;
+    if(answers[i]===null)k++;
+    else if(answers[i]===q.a){c++;ss[q.s].c++;}
+    else w++;
+  });
+  const score=c*2;
+  document.getElementById('rscore').textContent=score;
+  document.getElementById('rcor').textContent=c;
+  document.getElementById('rwrg').textContent=w;
+  document.getElementById('rskp').textContent=k;
+  document.getElementById('res-set-badge').textContent=SET_NAMES[activeSet].toUpperCase();
+  const cols={"Natural Science":"var(--blue)","Social Science":"var(--purple)","Math & Logic":"var(--green)","English":"var(--gold)"};
+  const icos={"Natural Science":"🔬","Social Science":"🌏","Math & Logic":"🧮","English":"💡"};
+  let bd='';
+  Object.keys(ss).forEach(k2=>{
+    bd+=`<div class="bdc"><div class="bh">${icos[k2]} ${k2}</div><div class="bs" style="color:${cols[k2]}">${ss[k2].c}/${ss[k2].t} đúng</div></div>`;
+  });
+  document.getElementById('secbd').innerHTML=bd;
+  let lbl,msg,color;
+  if(score>=34){lbl='🏆 Xuất sắc!';msg='Nền tảng rất vững! Tập trung ôn phần tự luận.';color='#c9a84c';}
+  else if(score>=28){lbl='⭐ Giỏi';msg='Kết quả tốt! Xem lại câu sai để cải thiện thêm.';color='#4caf7a';}
+  else if(score>=20){lbl='📚 Khá';msg='Cần ôn thêm phần Toán logic và Tiếng Anh.';color='#4a9eda';}
+  else{lbl='💪 Hãy cố lên!';msg='Xem kỹ đáp án, tìm ra điểm yếu và luyện lại!';color='#e05c5c';}
+  document.getElementById('rlabel').textContent=lbl;
+  document.getElementById('rmsg').textContent=msg;
+  const rf=document.getElementById('rfill');
+  rf.style.stroke=color;
+  setTimeout(()=>{rf.style.strokeDasharray='408';rf.style.strokeDashoffset=408-(408*(score/40));},200);
+  showScreen('results-screen');
+}
+
+function reviewExam(){cur=0;submitted=true;showScreen('exam-screen');document.getElementById('bsub').style.display='none';renderQ();renderDots();}
+
+function retryExam(){
+  answers=new Array(Q.length).fill(null);cur=0;submitted=false;timeLeft=30*60;
+  clearInterval(timerInt);
+  document.getElementById('bsub').style.display='';
+  document.getElementById('timer').textContent='30:00';
+  document.getElementById('timer').classList.remove('warn');
+  showScreen('exam-screen');renderQ();renderDots();startTimer();
+}
+
+function goHome(){
+  clearInterval(timerInt);
+  answers=new Array(Q.length).fill(null);cur=0;submitted=false;timeLeft=30*60;
+  document.getElementById('bsub').style.display='';
+  document.getElementById('timer').textContent='30:00';
+  document.getElementById('timer').classList.remove('warn');
+  showScreen('welcome');
+}
+
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('exam-screen').classList.contains('active'))return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')nav(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')nav(-1);
+  if(!submitted){const m={a:0,b:1,c:2,d:3,'1':0,'2':1,'3':2,'4':3};if(m[e.key.toLowerCase()]!==undefined)selectAns(m[e.key.toLowerCase()]);}
+});
+</script>
+</body>
+</html>
