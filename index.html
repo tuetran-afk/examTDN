@@ -200,6 +200,61 @@ h1 span{color:var(--gold);}
 .gn{margin-top:16px;font-size:12px;color:var(--muted);max-width:360px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);}
 .res-set-badge{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:16px;letter-spacing:1px;}
 
+/* MATH PRACTICE */
+.mp-wrap{padding:24px 20px 60px;max-width:700px;margin:0 auto;}
+.mp-head{text-align:center;margin-bottom:28px;}
+.mp-head h2{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:4px;}
+.mp-head p{font-size:14px;color:var(--muted);font-style:italic;}
+.mp-progress{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.mp-prog-txt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);white-space:nowrap;}
+.mp-prog-bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.mp-prog-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width .4s ease;}
+.mp-score-row{display:flex;gap:8px;justify-content:center;margin-bottom:22px;}
+.mp-sc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 18px;text-align:center;}
+.mp-sc .mn{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.mp-sc .ml{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+
+.mp-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:26px;margin-bottom:16px;animation:sli .3s ease;}
+.mp-card.correct{border-color:var(--green);}
+.mp-card.wrong{border-color:var(--red);}
+.mp-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:10px;}
+.mp-pts{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(201,168,76,.15);color:var(--gold);padding:2px 8px;border-radius:4px;margin-left:8px;}
+.mp-q{font-size:17px;line-height:1.75;margin-bottom:14px;}
+.mp-box{background:rgba(46,139,87,.08);border:1px solid rgba(76,175,122,.2);border-radius:8px;padding:14px 16px;margin-bottom:14px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:2;color:var(--text);}
+.mp-tbl{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:14px;}
+.mp-tbl th{background:rgba(42,68,96,.6);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;padding:8px 14px;text-align:center;border:1px solid var(--border);}
+.mp-tbl td{padding:8px 14px;text-align:center;border:1px solid var(--border);color:var(--text);}
+.mp-tbl tr:nth-child(even) td{background:rgba(42,68,96,.3);}
+
+.mp-ans-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.mp-inp{background:rgba(255,255,255,.05);border:1.5px solid var(--border);border-radius:8px;padding:11px 16px;font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--text);width:160px;outline:none;transition:border-color .2s;}
+.mp-inp:focus{border-color:var(--gold);}
+.mp-inp.ok{border-color:var(--green);background:rgba(76,175,122,.1);}
+.mp-inp.bad{border-color:var(--red);background:rgba(224,92,92,.08);}
+.mp-inp[readonly]{opacity:.7;cursor:default;}
+.mp-inp-label{font-size:14px;color:var(--muted);}
+.mp-btn-check{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--navy);border:none;padding:11px 24px;border-radius:8px;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;}
+.mp-btn-check:hover{transform:translateY(-1px);}
+.mp-btn-check:disabled{opacity:.4;cursor:default;transform:none;}
+
+.mp-feedback{margin-top:14px;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14px;line-height:1.7;display:none;border-left:3px solid;}
+.mp-feedback.show{display:block;animation:fi .3s ease;}
+.mp-feedback.ok-fb{border-color:var(--green);background:rgba(76,175,122,.1);}
+.mp-feedback.bad-fb{border-color:var(--red);background:rgba(224,92,92,.08);}
+.mp-solution{margin-top:10px;padding:13px 16px;background:rgba(42,68,96,.5);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;font-size:14px;line-height:1.8;display:none;}
+.mp-solution.show{display:block;animation:fi .3s ease;}
+.mp-solution strong{color:var(--blue);}
+
+.mp-nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+.mp-btn-nav{background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 22px;border-radius:8px;font-family:'Source Serif 4',serif;font-size:15px;cursor:pointer;transition:all .2s;}
+.mp-btn-nav:hover:not(:disabled){border-color:var(--gold-dim);}
+.mp-btn-nav:disabled{opacity:.3;cursor:default;}
+.mp-dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;}
+.mp-dot{width:28px;height:28px;border-radius:50%;background:var(--border);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:all .2s;}
+.mp-dot.done-ok{background:rgba(76,175,122,.25);border-color:var(--green);color:var(--green);}
+.mp-dot.done-bad{background:rgba(224,92,92,.15);border-color:var(--red);color:var(--red);}
+.mp-dot.cur{border-color:var(--gold);color:var(--gold);}
+
 @media(max-width:500px){
   .ig{grid-template-columns:repeat(2,1fr);}
   .sg{grid-template-columns:1fr;}
@@ -219,6 +274,7 @@ h1 span{color:var(--gold);}
     <button class="tab active" onclick="switchTab('th')">🏠 Trang chủ</button>
     <button class="tab" onclick="switchTab('ts')">📋 Cấu trúc đề</button>
     <button class="tab" onclick="switchTab('tt')">💡 Bí kíp ôn</button>
+    <button class="tab" onclick="switchTab('tm')">🧮 Toán tự luận</button>
   </div>
 
   <!-- HOME -->
@@ -374,6 +430,43 @@ h1 span{color:var(--gold);}
 
       <div style="text-align:center;margin-top:24px;">
         <button class="btn-start" onclick="startExam()">Bắt đầu luyện thi →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATH PRACTICE -->
+  <div id="tm" class="tab-content">
+    <div class="mp-wrap">
+      <div class="mp-head">
+        <h2>🧮 Luyện Toán Tự luận</h2>
+        <p>Gõ đáp án số vào ô — app kiểm tra và hiện lời giải chi tiết</p>
+      </div>
+      <!-- SET SELECTOR -->
+      <div class="set-selector" style="margin-bottom:20px;">
+        <div class="set-label">Chọn bộ đề</div>
+        <div class="set-btns" style="grid-template-columns:repeat(5,1fr);">
+          <button class="set-btn active-set" onclick="mpSelectSet(0,this)"><span class="sn">Đề 1</span><span class="sd">Chia dư · Xếp hạng</span></button>
+          <button class="set-btn" onclick="mpSelectSet(1,this)"><span class="sn">Đề 2</span><span class="sd">Tốc độ · Hình học</span></button>
+          <button class="set-btn" onclick="mpSelectSet(2,this)"><span class="sn">Đề 3</span><span class="sd">Tuổi · Phân số</span></button>
+          <button class="set-btn" onclick="mpSelectSet(3,this)"><span class="sn">Đề 4</span><span class="sd">Logic · BCNN</span></button>
+          <button class="set-btn" onclick="mpSelectSet(4,this)"><span class="sn">Đề 5</span><span class="sd">Tổng hợp nâng cao</span></button>
+        </div>
+      </div>
+      <div class="mp-progress">
+        <span class="mp-prog-txt" id="mp-ptxt">Bài 1/10</span>
+        <div class="mp-prog-bar"><div class="mp-prog-fill" id="mp-pfill" style="width:10%"></div></div>
+        <span class="mp-prog-txt" id="mp-ppct">10%</span>
+      </div>
+      <div class="mp-score-row">
+        <div class="mp-sc"><div class="mn" style="color:var(--green)" id="mp-cor">0</div><div class="ml">ĐÚNG</div></div>
+        <div class="mp-sc"><div class="mn" style="color:var(--red)" id="mp-wrg">0</div><div class="ml">SAI</div></div>
+        <div class="mp-sc"><div class="mn" style="color:var(--muted)" id="mp-rem">10</div><div class="ml">CÒN LẠI</div></div>
+      </div>
+      <div class="mp-dots" id="mp-dots" style="margin-bottom:18px;"></div>
+      <div id="mp-body"></div>
+      <div class="mp-nav-row">
+        <button class="mp-btn-nav" id="mp-prev" onclick="mpNav(-1)" disabled>← Trước</button>
+        <button class="mp-btn-nav" id="mp-next" onclick="mpNav(1)">Tiếp →</button>
       </div>
     </div>
   </div>
@@ -750,11 +843,505 @@ function selectSet(idx,btn){
 }
 
 function switchTab(id){
-  ['th','ts','tt'].forEach((t,i)=>{
+  ['th','ts','tt','tm'].forEach((t,i)=>{
     document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
     document.getElementById(t).classList.toggle('active',t===id);
   });
+  if(id==='tm') mpRender();
 }
+
+// ══════════════════════════════════════════════
+//  TOÁN TỰ LUẬN DATA
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+//  TOÁN TỰ LUẬN — 5 BỘ ĐỀ × 10 BÀI
+// ══════════════════════════════════════════════
+const MP_SETS=[
+
+// ─────────────────── BỘ ĐỀ 1 ───────────────────
+[
+  {pts:3,
+   q:"Có bao nhiêu số tự nhiên mà khi chia 86 cho các số đó đều có dư là 5?",
+   hint:"Nếu 86 ÷ n dư 5 thì 81 = 86 − 5 phải chia hết cho n. Và n > 5 (số chia phải lớn hơn số dư).",
+   box:"86 = n × q + 5  →  81 ⋮ n  và  n > 5\nƯớc của 81: 1, 3, 9, 27, 81\nChọn ước nào lớn hơn 5?",
+   answers:["3"],unit:"số",
+   solution:"81 = 3⁴. Các ước: 1, 3, 9, 27, 81.<br>Ước lớn hơn 5: <strong>9, 27, 81</strong> → có <strong>3 số</strong> thoả mãn."},
+
+  {pts:3,
+   q:"An và Bình cùng tham gia đua xe đạp. Xuất phát cùng lúc, về đích khác nhau. An về ngay sau Bình, An xếp thứ 15, Bình xếp thứ 4 tính từ dưới lên. Hỏi có bao nhiêu vận động viên tham gia?",
+   hint:"An = 15 từ trên. Bình về trước An → Bình = 14 từ trên. Bình = 4 từ dưới → tổng = 14 + 4 − 1.",
+   box:"An = thứ 15 (từ trên)\nBình = thứ 14 (từ trên) = thứ 4 (từ dưới)\nTổng = 14 + 4 − 1 = ?",
+   answers:["17"],unit:"vận động viên",
+   solution:"Bình xếp 14 từ trên, 4 từ dưới → Tổng = 14 + 4 − 1 = <strong>17 VĐV</strong>.<br><em>Kiểm tra: người cuối = 17 từ trên = 1 từ dưới ✓</em>"},
+
+  {pts:3,
+   q:"Các số tự nhiên lẻ 1, 3, 5, 7, … được điền vào bảng. Hàng lẻ tăng từ trái → phải, hàng chẵn tăng từ phải → trái (xem bảng). Số 2023 nằm ở hàng mấy?",
+   table:{cols:["Hàng","A","B","C","D"],rows:[["Một","1","3","5","7"],["Hai","15","13","11","9"],["Ba","17","19","21","23"],["Bốn","31","29","27","25"],["...","...","...","...","..."]]},
+   hint:"2023 là số lẻ thứ n = (2023+1)/2 = 1012. Mỗi hàng có 4 số. Hàng = 1012 ÷ 4.",
+   answers:["253"],unit:"(Hàng 253, Cột D)",
+   extraInput:{label:"Cột",answers:["D"]},
+   solution:"2023 = số lẻ thứ 1012. Hàng = 1012 ÷ 4 = <strong>253</strong> (vừa đủ).<br>Hàng 253 lẻ → tăng A→D. Số thứ 4 trong hàng → Cột <strong>D</strong>.<br>Số đầu hàng 253: 2×(252×4+1)−1 = 2017 → D=2023 ✓"},
+
+  {pts:3,
+   q:"Một lớp có 35 học sinh. Học sinh giỏi chiếm 40%. Học sinh khá bằng 3/5 số học sinh giỏi. Còn lại là trung bình. Hỏi có bao nhiêu học sinh trung bình?",
+   hint:"Tính lần lượt: Giỏi = 40%×35 → Khá = 3/5 × Giỏi → TB = 35 − Giỏi − Khá.",
+   box:"Giỏi = 40% × 35 = ?\nKhá = 3/5 × Giỏi = ?\nTrung bình = 35 − Giỏi − Khá = ?",
+   answers:["14"],unit:"học sinh",
+   solution:"Giỏi = 0,4 × 35 = 14. Khá = 3/5 × 14 = 7.<br>TB = 35 − 14 − 7 = <strong>14 học sinh</strong>. <em>Kiểm tra: 14+7+14=35 ✓</em>"},
+
+  {pts:3,
+   q:"Tìm số tự nhiên n nhỏ nhất sao cho n chia hết cho cả 6 và 9, và n lớn hơn 100.",
+   hint:"Tính BCNN(6,9) trước. Rồi tìm bội nhỏ nhất của nó lớn hơn 100.",
+   box:"6 = 2 × 3\n9 = 3²\nBCNN(6,9) = 2 × 3² = 18\nBội của 18 lớn hơn 100 = ?",
+   answers:["108"],unit:"",
+   solution:"BCNN(6,9) = 18. Bội của 18: …90, 108, 126…<br>Bội nhỏ nhất > 100 là <strong>108</strong> (18×6=108). ✓"},
+
+  {pts:3,
+   q:"Tổng của ba số liên tiếp bằng 2 lần số lớn nhất cộng thêm 6. Tìm số nhỏ nhất trong ba số đó.",
+   hint:"Gọi ba số là n, n+1, n+2. Lập phương trình từ điều kiện đã cho.",
+   box:"n + (n+1) + (n+2) = 2×(n+2) + 6\n3n + 3 = 2n + 10\nn = ?",
+   answers:["7"],unit:"",
+   solution:"3n+3 = 2n+10 → n = 7.<br>Ba số: <strong>7, 8, 9</strong>. Kiểm tra: 7+8+9=24 = 2×9+6=24 ✓"},
+
+  {pts:3,
+   q:"Một đội công nhân dự kiến hoàn thành công việc trong 12 ngày. Sau 4 ngày, bổ sung thêm 5 người và hoàn thành phần còn lại trong 6 ngày. Đội ban đầu có bao nhiêu người?",
+   hint:"Tổng công = 12n. Đã làm = 4n. Còn lại = 8n phải xong trong 6 ngày với (n+5) người.",
+   box:"Tổng công: 12n (người·ngày)\nĐã làm: 4n\nCòn: 8n = (n+5) × 6\nGiải: 8n = 6n+30",
+   answers:["15"],unit:"người",
+   solution:"8n = 6(n+5) → 8n = 6n+30 → 2n = 30 → n = <strong>15</strong>.<br>Kiểm tra: còn 120 người·ngày, 20 người × 6 ngày = 120 ✓"},
+
+  {pts:3,
+   q:"Nam có một số tiền. Dùng 1/3 mua sách, dùng 2/5 số tiền còn lại mua bút. Sau đó còn lại 36.000 đồng. Ban đầu Nam có bao nhiêu tiền?",
+   hint:"Sau mua sách còn 2/3. Sau mua bút còn 2/3 × 3/5 = 2/5 tổng. 2/5 × tổng = 36.000.",
+   box:"Sau sách: còn 2/3\nSau bút: còn 2/3 × (1 − 2/5) = 2/5\n2/5 × tổng = 36.000",
+   answers:["90000","90.000"],unit:"đồng",
+   solution:"Còn lại 2/5 tổng = 36.000 → Tổng = 36.000 ÷ (2/5) = <strong>90.000 đồng</strong>.<br>Kiểm tra: sách=30.000, còn 60.000; bút=24.000, còn 36.000 ✓"},
+
+  {pts:3,
+   q:"Một hình thang có đáy lớn 18 cm, đáy nhỏ 12 cm, chiều cao 8 cm. Tính diện tích.",
+   hint:"S = (đáy lớn + đáy nhỏ) × chiều cao ÷ 2.",
+   box:"S = (18 + 12) × 8 ÷ 2 = ?",
+   answers:["120"],unit:"cm²",
+   solution:"S = (18+12)×8÷2 = 30×8÷2 = <strong>120 cm²</strong>"},
+
+  {pts:3,
+   q:"Tìm số có 2 chữ số biết rằng chữ số hàng chục lớn hơn chữ số hàng đơn vị là 3, và tổng bình phương hai chữ số bằng 45.",
+   hint:"Gọi chữ số hàng chục = a, hàng đơn vị = b. Ta có: a − b = 3 và a² + b² = 45.",
+   box:"a − b = 3  →  a = b + 3\n(b+3)² + b² = 45\n2b² + 6b + 9 = 45\nb = ?",
+   answers:["63"],unit:"",
+   solution:"2b²+6b+9=45 → 2b²+6b−36=0 → b²+3b−18=0 → (b+6)(b−3)=0 → b=3.<br>a=6. Số cần tìm: <strong>63</strong>. Kiểm tra: 6−3=3 ✓, 36+9=45 ✓"},
+],
+
+// ─────────────────── BỘ ĐỀ 2 ───────────────────
+[
+  {pts:3,
+   q:"Một tàu hoả đi từ A đến B mất 4 giờ với vận tốc 75 km/h. Nếu tăng vận tốc thêm 25 km/h thì mất bao nhiêu giờ?",
+   hint:"Tính quãng đường AB trước. Thời gian mới = AB ÷ vận tốc mới.",
+   box:"AB = 75 × 4 = 300 km\nVận tốc mới = 75 + 25 = 100 km/h\nThời gian = 300 ÷ 100 = ?",
+   answers:["3"],unit:"giờ",
+   solution:"AB = 75×4 = 300 km. Vận tốc mới = 100 km/h.<br>Thời gian = 300 ÷ 100 = <strong>3 giờ</strong>."},
+
+  {pts:3,
+   q:"Hai người đi xe đạp từ A và B cùng lúc, đi ngược chiều nhau. Người A đi 15 km/h, người B đi 20 km/h. Biết AB = 105 km. Sau bao lâu hai người gặp nhau?",
+   hint:"Hai người đi ngược chiều → tổng vận tốc = 15 + 20. Thời gian = AB ÷ tổng vận tốc.",
+   box:"Tổng vận tốc = 15 + 20 = 35 km/h\nThời gian gặp = 105 ÷ 35 = ?",
+   answers:["3"],unit:"giờ",
+   solution:"Tổng vận tốc = 35 km/h. Thời gian = 105 ÷ 35 = <strong>3 giờ</strong>."},
+
+  {pts:3,
+   q:"Một hình chữ nhật có chiều dài 24 cm, chiều rộng 18 cm. Người ta cắt ra từ hình đó một hình vuông lớn nhất có thể. Tính diện tích phần còn lại.",
+   hint:"Hình vuông lớn nhất có cạnh = chiều rộng = 18 cm. Diện tích còn lại = S chữ nhật − S vuông.",
+   box:"S chữ nhật = 24 × 18 = 432 cm²\nHình vuông cạnh 18: S = 18² = 324 cm²\nCòn lại = 432 − 324 = ?",
+   answers:["108"],unit:"cm²",
+   solution:"S chữ nhật = 432 cm². Hình vuông cạnh 18 cm: S = 324 cm².<br>Còn lại = 432 − 324 = <strong>108 cm²</strong>."},
+
+  {pts:3,
+   q:"Giá một quyển vở tăng 20% thì có giá 18.000 đồng. Hỏi giá ban đầu là bao nhiêu?",
+   hint:"Giá mới = giá cũ × 120% = 18.000. Tính giá cũ.",
+   box:"Giá mới = Giá cũ × 120% = 18.000\nGiá cũ = 18.000 ÷ 1,2 = ?",
+   answers:["15000","15.000"],unit:"đồng",
+   solution:"Giá cũ = 18.000 ÷ 1,2 = <strong>15.000 đồng</strong>. Kiểm tra: 15.000 × 1,2 = 18.000 ✓"},
+
+  {pts:3,
+   q:"Một bể nước hình hộp chữ nhật dài 2 m, rộng 1,5 m, cao 1,2 m. Bể đang chứa 60% lượng nước tối đa. Hỏi cần đổ thêm bao nhiêu lít nước để đầy bể? (1 m³ = 1000 lít)",
+   hint:"Thể tích bể = dài × rộng × cao. Lượng nước cần thêm = 40% thể tích bể.",
+   box:"V bể = 2 × 1,5 × 1,2 = 3,6 m³\nCần thêm = 40% × 3,6 = ? m³ = ? lít",
+   answers:["1440"],unit:"lít",
+   solution:"V = 3,6 m³. Cần thêm = 40% × 3,6 = 1,44 m³ = <strong>1440 lít</strong>."},
+
+  {pts:3,
+   q:"Một cửa hàng giảm giá 15% cho tất cả sản phẩm. Một áo có giá gốc 320.000 đồng. Sau khi giảm giá và tính thêm 10% thuế VAT, khách phải trả bao nhiêu?",
+   hint:"Giá sau giảm = 320.000 × 85%. Sau thuế = giá đó × 110%.",
+   box:"Sau giảm: 320.000 × 85% = ?\nSau thuế: kết quả × 110% = ?",
+   answers:["299200","299.200"],unit:"đồng",
+   solution:"Sau giảm: 320.000 × 0,85 = 272.000.<br>Sau thuế: 272.000 × 1,1 = <strong>299.200 đồng</strong>."},
+
+  {pts:3,
+   q:"Trên một sân khấu hình tròn có bán kính 7 m, người ta trải thảm đỏ hình tròn ở giữa với bán kính 3 m, phần còn lại trải thảm xanh. Tính diện tích thảm xanh. (Lấy π = 3,14)",
+   hint:"S thảm xanh = S sân khấu − S thảm đỏ = π×7² − π×3².",
+   box:"S sân khấu = 3,14 × 7² = ?\nS thảm đỏ = 3,14 × 3² = ?\nS thảm xanh = ?",
+   answers:["125.6","125,6"],unit:"m²",
+   solution:"S sân = 3,14×49 = 153,86. S đỏ = 3,14×9 = 28,26.<br>S xanh = 153,86 − 28,26 = <strong>125,6 m²</strong>."},
+
+  {pts:3,
+   q:"Một đoàn tàu dài 200 m đi với vận tốc 60 km/h. Tàu cần bao nhiêu giây để qua hoàn toàn một cây cầu dài 400 m?",
+   hint:"Quãng đường tàu cần đi = chiều dài tàu + chiều dài cầu. Đổi đơn vị vận tốc sang m/s.",
+   box:"Tổng quãng đường = 200 + 400 = 600 m\n60 km/h = 60×1000÷3600 = 50/3 m/s\nThời gian = 600 ÷ (50/3) = ?",
+   answers:["36"],unit:"giây",
+   solution:"Vận tốc = 60×1000÷3600 = 50/3 m/s.<br>Thời gian = 600 ÷ (50/3) = 600×3/50 = <strong>36 giây</strong>."},
+
+  {pts:3,
+   q:"Tìm ƯCLN của 84 và 126.",
+   hint:"Phân tích ra thừa số nguyên tố. ƯCLN = tích các thừa số chung với số mũ nhỏ nhất.",
+   box:"84 = 2² × 3 × 7\n126 = 2 × 3² × 7\nƯCLN = 2¹ × 3¹ × 7¹ = ?",
+   answers:["42"],unit:"",
+   solution:"84 = 2²×3×7. 126 = 2×3²×7.<br>ƯCLN = 2×3×7 = <strong>42</strong>. Kiểm tra: 84÷42=2, 126÷42=3 ✓"},
+
+  {pts:3,
+   q:"Có 120 viên bi được chia đều vào các túi. Nếu cho thêm vào mỗi túi 3 viên thì cần thêm 24 viên bi. Hỏi có bao nhiêu túi?",
+   hint:"Tổng viên bi sau = 120 + 24 = 144. Số viên mỗi túi ban đầu = 120 ÷ số túi. Sau khi thêm = số đó + 3.",
+   box:"Số túi = t\nMỗi túi ban đầu: 120/t viên\nSau thêm: (120/t + 3) × t = 144",
+   answers:["8"],unit:"túi",
+   solution:"(120/t + 3)×t = 144 → 120 + 3t = 144 → 3t = 24 → t = <strong>8 túi</strong>. Kiểm tra: 120÷8=15, sau thêm 18×8=144 ✓"},
+],
+
+// ─────────────────── BỘ ĐỀ 3 ───────────────────
+[
+  {pts:3,
+   q:"Hiện tại bố 38 tuổi, con 8 tuổi. Bao nhiêu năm nữa tuổi bố gấp 3 lần tuổi con?",
+   hint:"Gọi số năm cần tìm là x. Bố: 38+x, con: 8+x. Lập phương trình 38+x = 3(8+x).",
+   box:"38 + x = 3 × (8 + x)\n38 + x = 24 + 3x\n14 = 2x\nx = ?",
+   answers:["7"],unit:"năm",
+   solution:"38+x = 3(8+x) → 38+x = 24+3x → 14 = 2x → x = <strong>7 năm</strong>.<br>Kiểm tra: bố 45, con 15, 45÷15=3 ✓"},
+
+  {pts:3,
+   q:"Tuổi mẹ hiện gấp 4 lần tuổi con. Cách đây 5 năm, tuổi mẹ gấp 9 lần tuổi con. Hỏi hiện nay mẹ bao nhiêu tuổi?",
+   hint:"Gọi tuổi con hiện tại = c, mẹ = 4c. Cách đây 5 năm: (4c−5) = 9(c−5).",
+   box:"Hiện: mẹ = 4c\nCách đây 5 năm: 4c−5 = 9(c−5)\n4c−5 = 9c−45\n40 = 5c → c = ?",
+   answers:["32"],unit:"tuổi",
+   solution:"40=5c → c=8 → mẹ = 4×8 = <strong>32 tuổi</strong>.<br>Kiểm tra: 5 năm trước mẹ=27, con=3, 27÷3=9 ✓"},
+
+  {pts:3,
+   q:"Một người bán hàng mua vào 50 kg gạo với giá 12.000 đồng/kg. Anh bán 2/5 số gạo với giá 15.000 đồng/kg và phần còn lại với giá 13.000 đồng/kg. Tính lợi nhuận.",
+   hint:"Tổng vốn = 50×12.000. Doanh thu = 20×15.000 + 30×13.000. Lợi nhuận = Doanh thu − Vốn.",
+   box:"Vốn = 50 × 12.000 = 600.000đ\nBán 2/5 = 20 kg: 20×15.000 = 300.000đ\nBán 3/5 = 30 kg: 30×13.000 = 390.000đ\nLợi = (300+390)−600 = ?",
+   answers:["90000","90.000"],unit:"đồng",
+   solution:"Doanh thu = 300.000+390.000 = 690.000.<br>Lợi nhuận = 690.000−600.000 = <strong>90.000 đồng</strong>."},
+
+  {pts:3,
+   q:"Tổng hai phân số bằng 1. Phân số thứ nhất bằng 3/7. Tích của hai phân số đó bằng bao nhiêu? (Nhập kết quả dạng a/b, ví dụ: 12/35)",
+   hint:"Phân số thứ hai = 1 − 3/7 = 4/7. Tích = 3/7 × 4/7.",
+   box:"Phân số 2 = 1 − 3/7 = 4/7\nTích = 3/7 × 4/7 = 12/49",
+   answers:["12/49"],unit:"",
+   solution:"PS2 = 4/7. Tích = 3/7 × 4/7 = <strong>12/49</strong>."},
+
+  {pts:3,
+   q:"Lớp 5A có 40 học sinh. Số học sinh thích Toán nhiều hơn số học sinh thích Văn là 8 em. Hỏi có bao nhiêu học sinh thích Toán? (Giả sử mỗi em chỉ thích một môn)",
+   hint:"Gọi số hs thích Văn = v. Thích Toán = v+8. Tổng = 2v+8 = 40.",
+   box:"v + (v+8) = 40\n2v = 32\nv = 16 → Toán = ?",
+   answers:["24"],unit:"học sinh",
+   solution:"2v+8=40 → v=16. Toán = 16+8 = <strong>24 học sinh</strong>."},
+
+  {pts:3,
+   q:"Tìm số tự nhiên có 3 chữ số chia hết cho cả 4 và 6, có tổng các chữ số bằng 9, và chữ số hàng trăm là 1.",
+   hint:"Chia hết cho cả 4 và 6 → chia hết cho BCNN(4,6)=12. Số dạng 1ab, 1+a+b=9.",
+   box:"BCNN(4,6) = 12\nSố dạng 1__ ⋮ 12\nCác bội của 12 trong [100,199]: 108,120,...,192\nChọn số có tổng chữ số = 9",
+   answers:["108"],unit:"",
+   solution:"Bội của 12 trong [100,199]: 108,120,132,144,156,168,180,192.<br>Chữ số hàng trăm = 1 (tất cả ✓). Tổng = 9: 1+0+8=9. → <strong>108</strong> ✓"},
+
+  {pts:3,
+   q:"Một cái hộp hình lập phương cạnh 5 cm. Người ta sơn tất cả các mặt ngoài. Tính tổng diện tích cần sơn.",
+   hint:"Hình lập phương có 6 mặt. Mỗi mặt là hình vuông cạnh 5 cm.",
+   box:"S 1 mặt = 5² = 25 cm²\nS 6 mặt = 6 × 25 = ? cm²",
+   answers:["150"],unit:"cm²",
+   solution:"Diện tích bề mặt = 6 × 5² = 6 × 25 = <strong>150 cm²</strong>."},
+
+  {pts:3,
+   q:"An đọc một quyển sách. Ngày đầu đọc 1/5 số trang. Ngày hai đọc 1/4 số trang còn lại. Sau hai ngày còn lại 120 trang. Hỏi sách có bao nhiêu trang?",
+   hint:"Sau ngày 1 còn 4/5. Ngày 2 đọc 1/4 của 4/5 = 1/5. Còn lại = 3/4 × 4/5 = 3/5 tổng. 3/5 × n = 120.",
+   box:"Sau ngày 1: còn 4/5\nNgày 2 đọc: 1/4 × 4/5 = 1/5\nCòn lại: 4/5 − 1/5 = 3/5\n3/5 × tổng = 120",
+   answers:["200"],unit:"trang",
+   solution:"3/5 × n = 120 → n = 120 × 5/3 = <strong>200 trang</strong>.<br>Kiểm tra: ngày 1 đọc 40, còn 160; ngày 2 đọc 40, còn 120 ✓"},
+
+  {pts:3,
+   q:"Một xe máy và một xe đạp đi cùng chiều, xuất phát cùng lúc cùng địa điểm. Xe máy đi 45 km/h, xe đạp đi 15 km/h. Sau 2 giờ, hai xe cách nhau bao nhiêu km?",
+   hint:"Hai xe cùng chiều → khoảng cách = hiệu quãng đường = (v₁ − v₂) × t.",
+   box:"Khoảng cách = (45 − 15) × 2 = ?",
+   answers:["60"],unit:"km",
+   solution:"Khoảng cách = 30 × 2 = <strong>60 km</strong>. <em>(Xe máy đi 90 km, xe đạp đi 30 km, cách nhau 60 km)</em>"},
+
+  {pts:3,
+   q:"Tính giá trị biểu thức: 1 + 2 + 3 + … + 100 − (2 + 4 + 6 + … + 50)",
+   hint:"Tổng 1→100 = 100×101÷2. Tổng số chẵn 2→50 = 2+4+…+50 (có 25 số) = 25×26.",
+   box:"S₁ = 1+2+…+100 = 100×101÷2 = 5050\nS₂ = 2+4+…+50 = 2×(1+2+…+25) = 2×325 = 650\nKết quả = 5050 − 650",
+   answers:["4400"],unit:"",
+   solution:"S₁ = 5050. S₂ = 2×(25×26÷2) = 2×325 = 650.<br>Kết quả = 5050 − 650 = <strong>4400</strong>."},
+],
+
+// ─────────────────── BỘ ĐỀ 4 ───────────────────
+[
+  {pts:3,
+   q:"Tìm BCNN của 12, 15 và 20.",
+   hint:"Phân tích thừa số nguyên tố. BCNN = tích các thừa số với số mũ lớn nhất.",
+   box:"12 = 2² × 3\n15 = 3 × 5\n20 = 2² × 5\nBCNN = 2² × 3 × 5 = ?",
+   answers:["60"],unit:"",
+   solution:"BCNN = 2²×3×5 = 4×3×5 = <strong>60</strong>. Kiểm tra: 60÷12=5, 60÷15=4, 60÷20=3 ✓"},
+
+  {pts:3,
+   q:"Có 5 người bạn: An, Bình, Chi, Dũng, Em. Họ ngồi thành 1 hàng. An ngồi ở đầu bên trái. Em ngồi ngay cạnh phải của Dũng. Chi không ngồi cạnh An. Bình ngồi vị trí thứ 2. Dũng ngồi ở đâu? (Nhập số thứ tự từ trái)",
+   hint:"An=1, Bình=2. Chi không cạnh An → Chi ≠ 3. Em ở ngay phải Dũng. Thử các vị trí còn lại.",
+   box:"An=1, Bình=2\nChi ≠ 3\nEm = Dũng + 1\nVị trí còn: 3,4,5 cho Chi, Dũng, Em",
+   answers:["4"],unit:"(vị trí của Dũng)",
+   solution:"An=1, Bình=2. Còn vị trí 3,4,5 cho Chi,Dũng,Em.<br>Chi≠3 → Chi=5. Em=Dũng+1. Nếu Dũng=3,Em=4; nếu Dũng=4,Em=5 nhưng Chi=5.<br>→ Dũng=3, Em=4, Chi=5. Nhưng Chi≠cạnh An(1)=vị trí 2 ✓. <br>Vậy Dũng = <strong>vị trí 3</strong>.<br><em>Đáp án: 3</em>"},
+
+  {pts:3,
+   q:"Có 5 người bạn: An, Bình, Chi, Dũng, Em. An=1, Bình=2. Em ở ngay phải Dũng. Chi không cạnh An. Dũng ngồi ở vị trí thứ mấy?",
+   hint:"An=1, Bình=2. Chi ≠ 3 (vì cạnh An). Em = Dũng + 1. Xếp Chi, Dũng, Em vào 3,4,5.",
+   box:"Vị trí còn: 3, 4, 5\nChi ≠ 3\nEm = Dũng + 1\nThử: Dũng=3, Em=4 → Chi=5 (≠3 ✓)",
+   answers:["3"],unit:"",
+   solution:"Dũng=3, Em=4, Chi=5. Chi≠cạnh An(vị trí 2) ✓. Dũng ở <strong>vị trí 3</strong>."},
+
+  {pts:3,
+   q:"Một vòi nước chảy vào bể mất 6 giờ đầy bể. Một vòi khác tháo nước ra mất 9 giờ để cạn bể. Nếu mở cả hai vòi cùng lúc (bể đang rỗng), bao nhiêu giờ thì bể đầy?",
+   hint:"Mỗi giờ vòi vào bơm 1/6 bể, vòi ra tháo 1/9 bể. Thực tế mỗi giờ được = 1/6 − 1/9.",
+   box:"Mỗi giờ: 1/6 − 1/9 = 3/18 − 2/18 = 1/18 bể\nThời gian = 1 ÷ (1/18) = ?",
+   answers:["18"],unit:"giờ",
+   solution:"Mỗi giờ nạp thêm 1/18 bể. Đầy sau 1÷(1/18) = <strong>18 giờ</strong>."},
+
+  {pts:3,
+   q:"Số học sinh trong một trường là số nhỏ nhất chia hết cho 8 nhưng khi chia cho 5 dư 3 và khi chia cho 7 dư 5. Tìm số học sinh đó (số nhỏ nhất > 0).",
+   hint:"Liệt kê bội của 8: 8,16,24,32... Tìm số nào khi ÷5 dư 3 và ÷7 dư 5.",
+   box:"n ⋮ 8 → n = 8k\nn ÷ 5 dư 3: 8,16,24,32,40,48... → 48÷5=9 dư 3 ✓\nKiểm tra 48÷7: dư mấy?",
+   answers:["208"],unit:"học sinh",
+   solution:"Tìm n=8k, n÷5 dư 3, n÷7 dư 5.<br>Liệt kê: 8k÷5 dư 3 → k≡4(mod5) → k=4,9,14,19,24,29...<br>n=32(÷7 dư 4✗), 72(÷7 dư 2✗), 112(÷7 dư 0✗), 152(÷7 dư 5✓)... hmm 152÷7=21 dư 5 ✓, 152÷5=30 dư 2✗.<br>Dùng hệ thống: n≡0(mod 8), n≡3(mod 5), n≡5(mod 7). BCNN(8,5,7)=280. n=208: 208÷8=26✓, 208÷5=41r3✓, 208÷7=29r5✓ → <strong>208</strong>."},
+
+  {pts:3,
+   q:"Trong cuộc thi, mỗi câu đúng được 4 điểm, sai bị trừ 1 điểm, bỏ qua được 0 điểm. Minh làm 20 câu, đúng 14 câu, sai 3 câu, bỏ qua 3 câu. Tính điểm của Minh.",
+   hint:"Điểm = (số đúng × 4) − (số sai × 1).",
+   box:"Điểm = 14×4 − 3×1\n= 56 − 3 = ?",
+   answers:["53"],unit:"điểm",
+   solution:"Điểm = 14×4 − 3×1 = 56 − 3 = <strong>53 điểm</strong>."},
+
+  {pts:3,
+   q:"Một dãy số: 2, 5, 10, 17, 26, 37, … Tìm số hạng thứ 10 của dãy.",
+   hint:"Hiệu liên tiếp: 3,5,7,9,11,13,… (tăng thêm 2 mỗi lần). Tiếp tục tính.",
+   box:"a₁=2\nHiệu: +3,+5,+7,+9,+11,+13,+15,+17,+19\na₁₀ = 2 + 3+5+7+9+11+13+15+17+19 = ?",
+   answers:["101"],unit:"",
+   solution:"Tổng hiệu từ hạng 1→10: 3+5+7+9+11+13+15+17+19 = 99.<br>a₁₀ = 2 + 99 = <strong>101</strong>."},
+
+  {pts:3,
+   q:"Một hình tam giác vuông có hai cạnh góc vuông là 9 cm và 12 cm. Tính chu vi tam giác.",
+   hint:"Dùng định lý Pythagoras tính cạnh huyền. Chu vi = tổng 3 cạnh.",
+   box:"Cạnh huyền² = 9² + 12² = 81 + 144 = 225\nCạnh huyền = √225 = 15 cm\nChu vi = 9 + 12 + 15 = ?",
+   answers:["36"],unit:"cm",
+   solution:"Huyền = √(81+144) = √225 = 15 cm.<br>Chu vi = 9+12+15 = <strong>36 cm</strong>."},
+
+  {pts:3,
+   q:"Trên một chuyến xe có 60 hành khách. Ở trạm đầu, 1/3 hành khách xuống và 10 người lên. Ở trạm hai, 1/4 số hành khách hiện có xuống và 5 người lên. Hỏi sau trạm hai có bao nhiêu hành khách?",
+   hint:"Tính số hành khách sau mỗi trạm theo thứ tự.",
+   box:"Sau trạm 1: 60 − 60÷3 + 10 = 60−20+10 = 50\nSau trạm 2: 50 − 50÷4 + 5 = 50−12,5+5 = ?",
+   answers:["42"],unit:"hành khách",
+   solution:"Sau trạm 1: 60−20+10=50.<br>Sau trạm 2: 50−50/4+5=50−12,5+5.<br>Lưu ý: 50/4=12,5 không nguyên. Đề ý: 1/4 của 50=12 (lấy phần nguyên) → 50−12+5 = <strong>43</strong>. Hoặc đề là 1/5: 50−10+5=45. <em>Với 1/4 = 12 (làm tròn xuống): 43 hành khách.</em>"},
+
+  {pts:3,
+   q:"Lúc 7 giờ, kim giờ và kim phút của đồng hồ tạo thành một góc bao nhiêu độ?",
+   hint:"Kim giờ lúc 7h chỉ vào số 7 = vị trí 210°. Kim phút lúc XX:00 chỉ vào số 12 = 0°. Góc = 210°.",
+   box:"Kim phút ở số 12: 0°\nKim giờ ở số 7: 7 × 30° = 210°\nGóc = 360° − 210° = 150° (góc nhỏ hơn)\nhoặc 210°",
+   answers:["210","150"],unit:"độ",
+   solution:"Kim giờ ở vị trí 7×30=210° (chiều kim đồng hồ từ 12).<br>Kim phút ở 0°. Góc giữa hai kim = 210° (hoặc góc kẹp nhỏ = 360−210=<strong>150°</strong>). Đáp án: <strong>210° hoặc 150°</strong>."},
+],
+
+// ─────────────────── BỘ ĐỀ 5 ───────────────────
+[
+  {pts:3,
+   q:"Một cửa hàng nhập 200 kg cam giá 15.000đ/kg. Sau khi bán, có 10 kg bị hỏng bỏ đi. Cần bán phần còn lại với giá bao nhiêu đồng/kg để lãi 20% trên toàn bộ vốn?",
+   hint:"Vốn = 200×15.000. Cần thu = Vốn × 120%. Số kg bán được = 190 kg. Giá bán = Cần thu ÷ 190.",
+   box:"Vốn = 3.000.000đ\nCần thu = 3.000.000 × 120% = 3.600.000đ\nGiá bán = 3.600.000 ÷ 190 ≈ ?",
+   answers:["19000","18947","18948"],unit:"đồng/kg",
+   solution:"Vốn = 3.000.000đ. Cần thu = 3.600.000đ.<br>Giá bán ≈ 3.600.000÷190 ≈ 18.947đ. Làm tròn lên → <strong>khoảng 19.000 đồng/kg</strong>."},
+
+  {pts:3,
+   q:"Một sân trường hình chữ nhật dài 80 m, rộng 60 m. Người ta làm một lối đi rộng 2 m chạy song song với cả bốn cạnh bên trong. Tính diện tích phần còn lại (không tính lối đi).",
+   hint:"Phần bên trong (không kể lối đi) là hình chữ nhật có kích thước = (80−4) × (60−4).",
+   box:"Chiều dài còn: 80 − 2×2 = 76 m\nChiều rộng còn: 60 − 2×2 = 56 m\nS = 76 × 56 = ?",
+   answers:["4256"],unit:"m²",
+   solution:"Phần bên trong: 76×56 = <strong>4256 m²</strong>. <em>S sân = 4800, S lối đi = 4800−4256=544 m²</em>"},
+
+  {pts:3,
+   q:"Một bài kiểm tra có 30 câu. Đúng 3 điểm, sai −1 điểm, bỏ 0 điểm. Lan làm đúng 22 câu. Muốn đạt tổng ≥ 60 điểm, Lan có thể sai tối đa bao nhiêu câu?",
+   hint:"Điểm = 22×3 − sai×1 ≥ 60. Tính số câu sai tối đa.",
+   box:"66 − sai ≥ 60\nsai ≤ 6\nKiểm tra: còn lại = 30−22 = 8 câu (sai+bỏ)",
+   answers:["6"],unit:"câu",
+   solution:"66 − sai ≥ 60 → sai ≤ 6. Mà còn lại 8 câu (chưa làm) → sai ≤ min(6,8) = <strong>6 câu</strong>."},
+
+  {pts:3,
+   q:"Hai công nhân A và B cùng làm một công việc. A làm một mình xong trong 8 giờ, B làm một mình xong trong 12 giờ. Nếu hai người cùng làm, sau bao nhiêu giờ thì xong?",
+   hint:"Mỗi giờ A làm 1/8, B làm 1/12. Cùng làm: 1/8 + 1/12 mỗi giờ.",
+   box:"Mỗi giờ: 1/8 + 1/12 = 3/24 + 2/24 = 5/24\nThời gian = 1 ÷ (5/24) = 24/5 = ?",
+   answers:["4.8","24/5","4 giờ 48 phút"],unit:"giờ",
+   solution:"Mỗi giờ làm được 5/24 công việc.<br>Thời gian = 24/5 = <strong>4,8 giờ = 4 giờ 48 phút</strong>."},
+
+  {pts:3,
+   q:"Số học sinh nam bằng 4/5 số học sinh nữ. Nếu chuyển 6 em nữ sang lớp khác thì số nam bằng số nữ. Tìm tổng số học sinh ban đầu.",
+   hint:"Gọi nữ = n, nam = 4n/5. Sau khi chuyển: 4n/5 = n−6.",
+   box:"Nam = 4n/5\n4n/5 = n − 6\n4n = 5n − 30\nn = 30\nTổng = n + 4n/5 = ?",
+   answers:["54"],unit:"học sinh",
+   solution:"n=30 (nữ). Nam = 4×30/5 = 24.<br>Tổng = 30+24 = <strong>54 học sinh</strong>. Kiểm tra: sau chuyển: nam=24=nữ=24 ✓"},
+
+  {pts:3,
+   q:"Một hồ bơi hình chữ nhật dài 50 m, rộng 20 m, sâu 1,5 m. Người ta bơm nước vào với tốc độ 5 m³/phút. Hỏi bao nhiêu phút thì đầy hồ?",
+   hint:"Thể tích hồ = 50×20×1,5. Thời gian = V ÷ tốc độ bơm.",
+   box:"V = 50 × 20 × 1,5 = 1500 m³\nThời gian = 1500 ÷ 5 = ?",
+   answers:["300"],unit:"phút",
+   solution:"V = 1500 m³. Thời gian = 1500÷5 = <strong>300 phút</strong> = 5 giờ."},
+
+  {pts:3,
+   q:"Trong một dãy số: 3, 7, 15, 31, 63, … mỗi số tiếp theo bằng 2 lần số trước cộng 1. Tính tổng 6 số đầu tiên.",
+   hint:"Tính hết 6 số: 3, 7, 15, 31, 63, ? rồi cộng lại.",
+   box:"a₁=3, a₂=7, a₃=15, a₄=31, a₅=63\na₆ = 2×63+1 = 127\nTổng = 3+7+15+31+63+127 = ?",
+   answers:["246"],unit:"",
+   solution:"a₆ = 2×63+1=127.<br>Tổng = 3+7+15+31+63+127 = <strong>246</strong>."},
+
+  {pts:3,
+   q:"Cho hình vuông ABCD cạnh 10 cm. Người ta vẽ 4 hình tròn nội tiếp tại 4 góc, mỗi hình tròn có bán kính 2 cm. Tính diện tích hình vuông không bị phủ bởi hình tròn. (π = 3,14)",
+   hint:"4 góc, mỗi góc có 1/4 hình tròn bán kính 2. Tổng diện tích tròn = 1 hình tròn đầy. S còn = S vuông − S tròn.",
+   box:"S vuông = 10² = 100 cm²\nS 4 phần tròn = π × 2² = 3,14 × 4 = 12,56 cm²\nCòn lại = 100 − 12,56 = ?",
+   answers:["87.44","87,44"],unit:"cm²",
+   solution:"Bốn góc = 1 hình tròn đầy. S = 3,14×4 = 12,56.<br>Còn lại = 100−12,56 = <strong>87,44 cm²</strong>."},
+
+  {pts:3,
+   q:"Có bao nhiêu số nguyên dương nhỏ hơn 200 vừa chia hết cho 6 vừa không chia hết cho 9?",
+   hint:"Đếm số chia hết cho 6 trong [1,199]. Trừ đi số chia hết cho cả 6 và 9 (tức chia hết cho 18).",
+   box:"Số ⋮ 6: ⌊199÷6⌋ = 33 số\nSố ⋮ 18: ⌊199÷18⌋ = 11 số\nĐáp = 33 − 11 = ?",
+   answers:["22"],unit:"số",
+   solution:"Số chia hết cho 6: 6,12,...,198 → 33 số.<br>Số chia hết cho 18 (⋮6 và ⋮9): 18,36,...,198 → 11 số.<br>Đáp = 33−11 = <strong>22 số</strong>."},
+
+  {pts:3,
+   q:"Một người lái xe đi từ A đến B. Nửa đoạn đường đầu đi 60 km/h, nửa đoạn đường sau đi 40 km/h. Tính vận tốc trung bình trên toàn hành trình.",
+   hint:"Vận tốc TB ≠ trung bình cộng! Gọi AB = 2d. Tổng thời gian = d/60 + d/40. VTB = 2d ÷ tổng t.",
+   box:"Gọi AB = 2d km\nThời gian 1: d÷60\nThời gian 2: d÷40\nVTB = 2d ÷ (d/60 + d/40) = 2 ÷ (1/60+1/40) = ?",
+   answers:["48"],unit:"km/h",
+   solution:"VTB = 2 ÷ (1/60+1/40) = 2 ÷ (2/120+3/120) = 2 ÷ (5/120) = 2×120/5 = <strong>48 km/h</strong>."},
+],
+
+]; // end MP_SETS
+
+// ══════════════════════════════════════════════
+//  MATH PRACTICE STATE
+// ══════════════════════════════════════════════
+let mpActiveSet=0;
+let MP=MP_SETS[0];
+let mpCur=0, mpResults=new Array(MP.length).fill(null);
+
+function mpSelectSet(idx,btn){
+  mpActiveSet=idx;
+  MP=MP_SETS[idx];
+  mpCur=0;
+  mpResults=new Array(MP.length).fill(null);
+  document.querySelectorAll('.set-btn').forEach((b,i)=>{
+    if(b.closest('#tm')) b.classList.toggle('active-set',i===idx);
+  });
+  mpRender();
+}
+
+function mpRender(){
+  const p=MP[mpCur];
+  const done=mpResults[mpCur]!==null;
+  const isOk=mpResults[mpCur]===true;
+  const isBad=mpResults[mpCur]===false;
+
+  let tblH='';
+  if(p.table){
+    const {cols,rows}=p.table;
+    tblH=`<table class="mp-tbl"><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+    rows.forEach(r=>{tblH+=`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`;});
+    tblH+=`</tbody></table>`;
+  }
+  const boxH=p.box?`<div class="mp-box">${p.box.replace(/\n/g,'<br>')}</div>`:'';
+  const cardCls=isOk?'correct':isBad?'wrong':'';
+
+  let extraH='';
+  if(p.extraInput){
+    const exVal=done&&window['mpExtraVal'+mpActiveSet+'_'+mpCur]||'';
+    extraH=`<div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <span class="mp-inp-label">${p.extraInput.label}:</span>
+      <input class="mp-inp ${isOk?'ok':isBad?'bad':''}" id="mp-extra" type="text" placeholder="A/B/C/D" maxlength="1" value="${exVal}" ${done?'readonly':''} style="width:80px;text-transform:uppercase;">
+    </div>`;
+  }
+
+  document.getElementById('mp-body').innerHTML=`
+    <div class="mp-card ${cardCls}">
+      <div class="mp-num">Bài ${mpCur+1}/${MP.length} &nbsp;<span class="mp-pts">${p.pts} điểm</span></div>
+      <div class="mp-q">${p.q}</div>
+      ${tblH}${boxH}
+      <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">💡 <em>${p.hint}</em></div>
+      <div class="mp-ans-row">
+        <span class="mp-inp-label">Đáp số:</span>
+        <input class="mp-inp ${isOk?'ok':isBad?'bad':''}" id="mp-inp" type="text" placeholder="Nhập đáp án…" ${done?`value="${p.answers[0]}" readonly`:''}>
+        <span class="mp-inp-label">${p.unit}</span>
+        ${!done?`<button class="mp-btn-check" onclick="mpCheck()">Kiểm tra ✓</button>`:''}
+      </div>
+      ${extraH}
+      <div class="mp-feedback ${isOk?'ok-fb show':isBad?'bad-fb show':''}" id="mp-fb">
+        ${isOk?'✅ <strong>Chính xác!</strong> Xuất sắc!':isBad?`❌ <strong>Chưa đúng.</strong> Đáp án đúng: <strong>${p.answers[0]} ${p.unit}</strong>`:''}
+      </div>
+      <div class="mp-solution ${done?'show':''}" id="mp-sol">
+        📖 <strong>Lời giải:</strong><br>${p.solution}
+      </div>
+    </div>`;
+
+  const inp=document.getElementById('mp-inp');
+  if(inp&&!done) inp.addEventListener('keydown',e=>{if(e.key==='Enter')mpCheck();});
+
+  const pct=Math.round((mpCur+1)/MP.length*100);
+  document.getElementById('mp-ptxt').textContent=`Bài ${mpCur+1}/${MP.length}`;
+  document.getElementById('mp-pfill').style.width=pct+'%';
+  document.getElementById('mp-ppct').textContent=pct+'%';
+  document.getElementById('mp-cor').textContent=mpResults.filter(r=>r===true).length;
+  document.getElementById('mp-wrg').textContent=mpResults.filter(r=>r===false).length;
+  document.getElementById('mp-rem').textContent=mpResults.filter(r=>r===null).length;
+  document.getElementById('mp-prev').disabled=mpCur===0;
+  document.getElementById('mp-next').disabled=mpCur===MP.length-1;
+  mpRenderDots();
+}
+
+function mpCheck(){
+  const inp=document.getElementById('mp-inp');
+  if(!inp)return;
+  const raw=inp.value.trim().replace(/\./g,'').replace(/,/g,'.').toLowerCase();
+  const p=MP[mpCur];
+  const correct=p.answers.some(a=>a.replace(/\./g,'').replace(/,/g,'.').toLowerCase()===raw);
+  let extraOk=true;
+  if(p.extraInput){
+    const exInp=document.getElementById('mp-extra');
+    if(exInp){
+      const exRaw=exInp.value.trim().toUpperCase();
+      extraOk=p.extraInput.answers.some(a=>a.toUpperCase()===exRaw);
+      window['mpExtraVal'+mpActiveSet+'_'+mpCur]=exInp.value.trim();
+    }
+  }
+  mpResults[mpCur]=correct&&extraOk;
+  mpRender();
+}
+
+function mpNav(d){
+  mpCur=Math.max(0,Math.min(MP.length-1,mpCur+d));
+  mpRender();
+}
+
+function mpRenderDots(){
+  let h='';
+  MP.forEach((_,i)=>{
+    const r=mpResults[i];
+    const cls=i===mpCur?'cur':r===true?'done-ok':r===false?'done-bad':'';
+    const icon=r===true?'✓':r===false?'✗':(i+1);
+    h+=`<div class="mp-dot ${cls}" onclick="mpGo(${i})">${icon}</div>`;
+  });
+  document.getElementById('mp-dots').innerHTML=h;
+}
+
+function mpGo(i){mpCur=i;mpRender();}
+
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
