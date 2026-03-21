@@ -256,6 +256,36 @@ h1 span{color:var(--gold);}
 .mp-dot.done-bad{background:rgba(224,92,92,.15);border-color:var(--red);color:var(--red);}
 .mp-dot.cur{border-color:var(--gold);color:var(--gold);}
 
+
+/* HISTORY TAB */
+.hist-wrap{padding:24px 20px 60px;max-width:720px;margin:0 auto;}
+.hist-wrap h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:4px;}
+.hist-wrap .ph{text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px;}
+.hist-summary{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.hist-sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px 20px;text-align:center;min-width:90px;}
+.hist-sc .hn{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;display:block;margin-bottom:2px;}
+.hist-sc .hl{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.hist-chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:20px;}
+.hist-chart-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;text-align:center;}
+.hist-chart{display:flex;align-items:flex-end;gap:6px;height:80px;justify-content:center;}
+.hist-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;max-width:36px;}
+.hist-bar{width:100%;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--gold-light),var(--gold-dim));min-height:4px;transition:height .4s ease;}
+.hist-bar-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);}
+.hist-bar-score{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);}
+.hist-empty{text-align:center;padding:40px 20px;color:var(--muted);font-style:italic;font-size:15px;}
+.hist-table{width:100%;border-collapse:collapse;font-size:14px;}
+.hist-table th{background:rgba(42,68,96,.6);color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:10px;padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);letter-spacing:1px;}
+.hist-table td{padding:11px 12px;border-bottom:1px solid rgba(42,68,96,.5);vertical-align:middle;}
+.hist-table tr:last-child td{border-bottom:none;}
+.hist-table tr:hover td{background:rgba(42,68,96,.3);}
+.hist-badge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;display:inline-block;}
+.hist-badge.mc{background:rgba(74,158,218,.15);color:var(--blue);}
+.hist-badge.tl{background:rgba(76,175,122,.15);color:var(--green);}
+.hist-score-chip{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;}
+.hist-btn-clear{background:var(--card);border:1px solid var(--red);color:var(--red);padding:10px 24px;border-radius:8px;font-family:'Source Serif 4',serif;font-size:14px;cursor:pointer;transition:all .2s;margin-top:20px;}
+.hist-btn-clear:hover{background:rgba(224,92,92,.1);}
+.hist-actions{text-align:center;margin-top:16px;}
+
 @media(max-width:500px){
   .ig{grid-template-columns:repeat(2,1fr);}
   .sg{grid-template-columns:1fr;}
@@ -276,6 +306,7 @@ h1 span{color:var(--gold);}
     <button class="tab" onclick="switchTab('ts')">📋 Cấu trúc đề</button>
     <button class="tab" onclick="switchTab('tt')">💡 Bí kíp ôn</button>
     <button class="tab" onclick="switchTab('tm')">🧮 Toán tự luận</button>
+    <button class="tab" onclick="switchTab('th2')">📊 Lịch sử</button>
   </div>
 
   <!-- HOME -->
@@ -473,6 +504,29 @@ h1 span{color:var(--gold);}
   </div>
 </div>
 
+
+  <!-- HISTORY TAB -->
+  <div id="th2" class="tab-content">
+    <div class="hist-wrap">
+      <h2>📊 Lịch sử luyện thi</h2>
+      <p class="ph">Tự động lưu sau mỗi lần nộp bài — lưu trong trình duyệt</p>
+      <div class="hist-summary">
+        <div class="hist-sc"><span class="hn" id="hs-total" style="color:var(--gold)">0</span><div class="hl">LƯỢT THI</div></div>
+        <div class="hist-sc"><span class="hn" id="hs-best" style="color:var(--green)">—</span><div class="hl">CAO NHẤT</div></div>
+        <div class="hist-sc"><span class="hn" id="hs-avg" style="color:var(--blue)">—</span><div class="hl">TRUNG BÌNH</div></div>
+        <div class="hist-sc"><span class="hn" id="hs-streak" style="color:var(--gold)">0</span><div class="hl">NGÀY LIÊN TIẾP</div></div>
+      </div>
+      <div class="hist-chart-wrap" id="hs-chart-wrap">
+        <div class="hist-chart-title">Tiến bộ điểm số (10 lần gần nhất)</div>
+        <div class="hist-chart" id="hs-chart"></div>
+      </div>
+      <div id="hs-body"></div>
+      <div class="hist-actions">
+        <button class="hist-btn-clear" onclick="clearHistory()">🗑 Xóa toàn bộ lịch sử</button>
+      </div>
+    </div>
+  </div>
+
 <!-- ═══════════════ EXAM ═══════════════ -->
 <div id="exam-screen" class="screen">
   <div class="exam-hdr">
@@ -528,6 +582,16 @@ h1 span{color:var(--gold);}
 </div>
 
 <script>
+// Global error handler - hiện thông báo thay vì trang trắng
+window.onerror = function(msg, src, line, col, err) {
+  document.body.innerHTML = '<div style="font-family:monospace;padding:40px;background:#0d1b2a;color:#e05c5c;min-height:100vh;">'
+    + '<h2 style="color:#c9a84c">⚠️ Lỗi JavaScript</h2>'
+    + '<p style="margin-top:12px">Message: ' + msg + '</p>'
+    + '<p>Line: ' + line + ', Col: ' + col + '</p>'
+    + '<p style="color:#8a9ab5;margin-top:20px">Vui lòng báo lại lỗi này.</p>'
+    + '</div>';
+  return true;
+};
 // ══════════════════════════════════════════════
 //  ĐỀ 1
 // ══════════════════════════════════════════════
@@ -844,11 +908,12 @@ function selectSet(idx,btn){
 }
 
 function switchTab(id){
-  ['th','ts','tt','tm'].forEach((t,i)=>{
+  ['th','ts','tt','tm','th2'].forEach((t,i)=>{
     document.querySelectorAll('.tab')[i].classList.toggle('active',t===id);
     document.getElementById(t).classList.toggle('active',t===id);
   });
   if(id==='tm') mpRender();
+  if(id==='th2') renderHistory();
 }
 
 // ══════════════════════════════════════════════
@@ -1459,6 +1524,7 @@ function submitExam(){
   rf.style.stroke=color;
   setTimeout(()=>{rf.style.strokeDasharray='408';rf.style.strokeDashoffset=408-(408*(score/40));},200);
   showScreen('results-screen');
+  saveHistory(score,c,w,k,ss);
 }
 
 function reviewExam(){cur=0;submitted=true;showScreen('exam-screen');document.getElementById('bsub').style.display='none';renderQ();renderDots();}
@@ -1487,6 +1553,131 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowLeft'||e.key==='ArrowUp')nav(-1);
   if(!submitted){const m={a:0,b:1,c:2,d:3,'1':0,'2':1,'3':2,'4':3};if(m[e.key.toLowerCase()]!==undefined)selectAns(m[e.key.toLowerCase()]);}
 });
+
+// ══════════════════════════════════════════════
+//  LỊCH SỬ THI — localStorage
+// ══════════════════════════════════════════════
+const HIST_KEY='tdnExamHistory';
+
+function saveHistory(score,correct,wrong,skip,secStats){
+  const hist=loadHistoryData();
+  const entry={
+    ts:Date.now(),
+    date:new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'}),
+    time:new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}),
+    type:'mc',
+    setName:SET_NAMES[activeSet],
+    setIdx:activeSet,
+    total:Q.length,
+    score,correct,wrong,skip,
+    maxScore:Q.length*2,
+    pct:Math.round(score/(Q.length*2)*100),
+    sec:secStats
+  };
+  hist.unshift(entry);
+  if(hist.length>50) hist.length=50; // giữ tối đa 50 lần
+  try{ localStorage.setItem(HIST_KEY,JSON.stringify(hist)); }catch(e){}
+}
+
+function loadHistoryData(){
+  try{
+    const d=localStorage.getItem(HIST_KEY);
+    return d?JSON.parse(d):[];
+  }catch(e){return [];}
+}
+
+function clearHistory(){
+  if(!confirm('Xóa toàn bộ lịch sử luyện thi?')) return;
+  try{ localStorage.removeItem(HIST_KEY); }catch(e){}
+  renderHistory();
+}
+
+function renderHistory(){
+  const hist=loadHistoryData();
+
+  // Summary stats
+  const mcHist=hist.filter(h=>h.type==='mc');
+  document.getElementById('hs-total').textContent=hist.length||'0';
+  if(mcHist.length){
+    const best=Math.max(...mcHist.map(h=>h.pct));
+    const avg=Math.round(mcHist.reduce((a,h)=>a+h.pct,0)/mcHist.length);
+    document.getElementById('hs-best').textContent=best+'%';
+    document.getElementById('hs-avg').textContent=avg+'%';
+  } else {
+    document.getElementById('hs-best').textContent='—';
+    document.getElementById('hs-avg').textContent='—';
+  }
+
+  // Streak: đếm số ngày liên tiếp gần nhất có thi
+  const days=[...new Set(hist.map(h=>h.date))];
+  let streak=0;
+  const today=new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const yesterday=new Date(Date.now()-86400000).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+  if(days.includes(today)||days.includes(yesterday)){
+    streak=1;
+    let d=new Date(Date.now()-(days.includes(today)?86400000:172800000));
+    while(true){
+      const ds=d.toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+      if(days.includes(ds)){streak++;d=new Date(d-86400000);}else break;
+    }
+  }
+  document.getElementById('hs-streak').textContent=streak;
+
+  // Chart (10 lần gần nhất, type mc)
+  const chartData=mcHist.slice(0,10).reverse();
+  const chartEl=document.getElementById('hs-chart');
+  if(chartData.length===0){
+    document.getElementById('hs-chart-wrap').style.display='none';
+  } else {
+    document.getElementById('hs-chart-wrap').style.display='';
+    const maxPct=100;
+    chartEl.innerHTML=chartData.map((h,i)=>{
+      const barH=Math.max(4,Math.round(h.pct/maxPct*80));
+      const color=h.pct>=80?'var(--green)':h.pct>=60?'var(--gold)':'var(--red)';
+      return `<div class="hist-bar-wrap">
+        <div class="hist-bar-score">${h.pct}%</div>
+        <div class="hist-bar" style="height:${barH}px;background:${color};"></div>
+        <div class="hist-bar-lbl">${h.setName.replace('Đề ','')}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Table
+  const body=document.getElementById('hs-body');
+  if(hist.length===0){
+    body.innerHTML='<div class="hist-empty">📭 Chưa có lần thi nào được lưu.<br>Bắt đầu thi thử để ghi lại lịch sử!</div>';
+    return;
+  }
+
+  const colsH={"Natural Science":"var(--blue)","Social Science":"var(--purple)","Math & Logic":"var(--green)","English":"var(--gold)"};
+  const icos={"Natural Science":"🔬","Social Science":"🌏","Math & Logic":"🧮","English":"💡"};
+
+  body.innerHTML=`<table class="hist-table">
+    <thead><tr>
+      <th>NGÀY GIỜ</th>
+      <th>BỘ ĐỀ</th>
+      <th>ĐIỂM</th>
+      <th>ĐÚNG</th>
+      <th>SAI</th>
+      <th>TỪNG PHẦN</th>
+    </tr></thead>
+    <tbody>${hist.map((h,i)=>{
+      const scoreColor=h.pct>=80?'var(--green)':h.pct>=60?'var(--gold)':'var(--red)';
+      const secBits=h.sec?Object.keys(h.sec).map(k=>
+        `<span style="font-size:11px;color:${colsH[k]||'var(--muted)'};margin-right:6px;">${icos[k]||''} ${h.sec[k].c}/${h.sec[k].t}</span>`
+      ).join(''):'—';
+      return `<tr>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">${h.date}<br>${h.time||''}</td>
+        <td><span class="hist-badge mc">${h.setName||'—'}</span></td>
+        <td><span class="hist-score-chip" style="color:${scoreColor}">${h.score||0}<span style="font-size:12px;color:var(--muted)">/${h.maxScore||40}</span></span><br><span style="font-size:11px;color:var(--muted)">${h.pct||0}%</span></td>
+        <td style="color:var(--green);font-family:'JetBrains Mono',monospace;">${h.correct||0}</td>
+        <td style="color:var(--red);font-family:'JetBrains Mono',monospace;">${h.wrong||0}</td>
+        <td>${secBits}</td>
+      </tr>`;
+    }).join('')}
+    </tbody></table>`;
+}
+
 </script>
 </body>
 </html>
